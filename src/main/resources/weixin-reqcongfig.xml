@@ -3,9 +3,11 @@
 <weixin-req>
     <req key="access_token" method="get" url="https://api.weixin.qq.com/cgi-bin/token?1=1"></req>
     <req key="getcallbackip" method="get" url="https://api.weixin.qq.com/cgi-bin/getcallbackip?1=1"></req>
-    <req key="mediaUpload" method="post" mappingHandler="org.jeewx.api.core.handler.impl.WeixinReqMediaUploadHandler" 
+    
+    <!-- 素材接口 -->
+    <req key="uploadTempMedia" method="post" mappingHandler="WeixinReqMediaUploadHandler" 
     	 url="http://file.api.weixin.qq.com/cgi-bin/media/upload?1=1"></req>
-    <req key="mediaget" method="get" mappingHandler="org.jeewx.api.core.handler.impl.WeixinReqMediaDownHandler" 
+    <req key="downTempMedia" method="get" mappingHandler="org.jeewx.api.core.handler.impl.WeixinReqMediaDownHandler" 
          url="http://file.api.weixin.qq.com/cgi-bin/media/get?1=1"></req>
     
     <!-- 客服接口 -->

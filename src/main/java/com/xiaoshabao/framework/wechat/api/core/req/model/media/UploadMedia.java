@@ -1,10 +1,13 @@
-package com.xiaoshabao.framework.wechat.apiJW.core.req.model;
+package com.xiaoshabao.framework.wechat.api.core.req.model.media;
 
-import com.xiaoshabao.framework.wechat.apiJW.core.annotation.ReqType;
+import com.xiaoshabao.framework.wechat.api.core.annotation.ReqType;
+import com.xiaoshabao.framework.wechat.api.core.req.model.WeixinReqParam;
 
 /**
- * 公众号可调用本接口来上传图片、语音、视频等文件到微信服务器，
- * 上传后服务器会返回对应的media_id，公众号此后可根据该media_id来获取多媒体
+ * 微信上传素材
+ * <p>
+ * 公众号可调用本接口来上传图片、语音、视频等文件到微信服务器， 上传后服务器会返回对应的media_id，公众号此后可根据该media_id来获取多媒体
+ * </p>
  */
 @ReqType("mediaUpload")
 public class UploadMedia extends WeixinReqParam {
@@ -33,6 +36,5 @@ public class UploadMedia extends WeixinReqParam {
 	public void setFilePathName(String filePathName) {
 		this.filePathName = filePathName;
 	}
-	
-	
+
 }

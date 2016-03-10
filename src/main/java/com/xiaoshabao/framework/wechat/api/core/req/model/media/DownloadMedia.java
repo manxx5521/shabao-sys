@@ -1,13 +1,11 @@
-package com.xiaoshabao.framework.wechat.api.core.req.model;
+package com.xiaoshabao.framework.wechat.api.core.req.model.media;
 
 import com.xiaoshabao.framework.wechat.api.core.annotation.ReqType;
+import com.xiaoshabao.framework.wechat.api.core.req.model.WeixinReqParam;
 
 
 /**
- * 下载多媒体文件
- * 
- * @author sfli.sir
- * 
+ * 下载-永久多媒体文件
  */
 @ReqType("mediaget")
 public class DownloadMedia extends WeixinReqParam {

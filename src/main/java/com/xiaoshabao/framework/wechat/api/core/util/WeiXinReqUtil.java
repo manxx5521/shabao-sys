@@ -91,7 +91,7 @@ public class WeiXinReqUtil {
 			String mappingHandler = WechatApiConfig.DEFAULT_HANDLER;
 			String datatype = WeiXinConstant.PARAM_DATA_TYPE;
 			if (mapping.getAttribute("mappingHandler") != null) {
-				mappingHandler = mapping.getAttribute("mappingHandler")
+				mappingHandler = WechatApiConfig.HANDLER_PATH+mapping.getAttribute("mappingHandler")
 						.getValue();
 			}
 			if (mapping.getAttribute("datatype") != null) {

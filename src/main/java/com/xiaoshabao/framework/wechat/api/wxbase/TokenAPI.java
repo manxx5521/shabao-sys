@@ -29,18 +29,4 @@ public class TokenAPI {
 		newAccessToken = result.getString("access_token");;
 		return newAccessToken;
 	}
-	 
-	
-	public static void main(String[] args){
-		 
-		try {
-			String s = TokenAPI.getAccessToken("wx07e34f9575809866","d8c5dae813951b0c31599c1a8aebf410");
-			
-			System.out.println(s);
-			//i4NLqMizqTXaDLmD6m397hj1XTQfRFcRASb3HMi8TbLTvBS9wuKKvFf1fXWUB9mMjfw3fJNPwqoHIFTY3NVmDAgRJCz8Kx1tFEOxGmv3ydSkdCXCDZDZIdP695nUw0-bCHKiAHAWBE
-		} catch (WexinReqException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
