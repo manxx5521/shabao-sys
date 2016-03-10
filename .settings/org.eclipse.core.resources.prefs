@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/config.properties=GBK
+encoding//src/main/resources/log4j.properties=GBK
+encoding//src/main/webapp/WEB-INF/context/headAdmin.jsp=UTF-8
+encoding//src/main/webapp/resources/wechat/article/page_mp_article_improve_combo2a7a3f.css=UTF-8
+encoding//src/main/webapp/resources/wechat/vote/dialog.css=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wechatUserEntity">
+	<select id="wechatuserentityGetValues" resultType="com.xiaoshabao.wxweb.entity.WechatUserEntity"
+	parameterType="java.util.Map">
+		select b.account_id,b.wx_user_id,b.openid,b.update_time from  wx_user b
+		<where>
+			<if test="login_name != null and login_name !=''">
+				b.account_id=#{account_id}
+			</if>
+		</where>
+		order by b.update_time desc
+	</select>
+</mapper>

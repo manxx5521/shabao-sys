@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="voteplayersql">
+	<select id="voteplayerentityGetValues" resultType="com.xiaoshabao.wxweb.entity.VotePlayerEntity"
+		parameterType="java.util.Map">
+		select a.player_id,a.vote_id,player_name,a.player_num,a.des,a.image,a.vote_num,a.update_time 
+		from wx_vote_player a
+		<where>
+			<if test="vote_id != null and vote_id !=''">
+				a.vote_id=#{vote_id}
+			</if>
+			<if test="player_id != null and player_id !=''">
+				and a.player_id=#{player_id}
+			</if>
+		</where>
+		ORDER BY a.player_num
+	</select>
+	
+	<!-- 投票排行 -->
+	<select id="votopaihang" resultType="com.xiaoshabao.wxweb.entity.VotePlayerEntity"
+		parameterType="java.util.Map">
+		select a.player_id,a.vote_id,player_name,a.player_num,a.des,a.image,a.vote_num,a.update_time 
+		from wx_vote_player a
+		<where>
+			<if test="vote_id != null and vote_id !=''">
+				a.vote_id=#{vote_id}
+			</if>
+		</where>
+		ORDER BY a.vote_num desc LIMIT 20
+	</select>
+</mapper>

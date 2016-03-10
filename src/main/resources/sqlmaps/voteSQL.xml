@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="votesql">
+	<select id="voteentityGetValues" resultType="com.xiaoshabao.wxweb.entity.VoteEntity"
+		parameterType="java.util.Map">
+		select a.vote_id,a.account_id,a.vote_name,a.des,a.start_time,a.end_time,a.create_staff,a.create_time 
+		from wx_vote a
+		<where>
+			<if test="vote_id != null and vote_id !=''">
+				a.vote_id=#{vote_id}
+			</if>
+		</where>
+		order by a.create_time DESC
+	</select>
+	<select id="voteentityGetOne" resultType="com.xiaoshabao.wxweb.entity.VoteEntity"
+		parameterType="java.util.Map">
+		select a.vote_id,a.account_id,a.vote_name,a.des,a.start_time,a.end_time,a.create_staff,a.create_time 
+		from wx_vote a
+		<where>
+			<if test="vote_id != null and vote_id !=''">
+				a.vote_id=#{vote_id}
+			</if>
+		</where>
+	</select>
+	<!-- 统计投票活动总票数 -->
+	<select id="votenumcount" resultType="java.lang.Integer"
+		parameterType="java.util.Map">
+		select sum(a.vote_num) from wx_vote_player a
+		<where>
+			<if test="vote_id != null and vote_id !=''">
+				a.vote_id=#{vote_id}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

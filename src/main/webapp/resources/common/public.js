@@ -1,0 +1,85 @@
+$(document).ready(function() {
+	// 提交表单
+	$('.btn').click(function() {
+		if (ch_input()) {
+			var fromdata = $("#loginform").serialize();
+			$.ajax({
+				type : "POST",
+				url : "loginIN.html",
+				data : fromdata,
+				dataType : "json",
+				async : true,
+				success : function(data) {
+					debugger;
+					if (data.success) {
+						window.location.href = './index.html';
+						// top.location.href = "index.html";
+						// return false;
+					} else {
+						if (data.message != null && data.message != "") {
+							alert(data.message);
+						} else {
+							alert('保存数据失败！');
+						}
+					}
+				},
+				error : function(info) {
+					alert(info.responseText);
+					alert(info);
+				}
+			});
+		}
+	})
+})
+
+// 验证登录
+function ch_input() {
+	var msg = "\n登录提示信息：\n\n";
+	if (document.all.loginform.user_id.value == ''
+			| document.all.loginform.user_id.value == 'admin') {
+		msg += "您输入的用户名为空，请重新填写并确认!\n";
+		alert(msg);
+		document.all.loginform.user_id.focus();
+		return false;
+	}
+	if (document.all.loginform.password.value == ''
+			| document.all.loginform.password.value == '密码') {
+		msg += "您输入的密码为空,请重新填写并确认!\n";
+		alert(msg);
+		document.all.loginform.password.focus();
+		return false;
+	}
+	return true;
+}
+
+// 本页action提交
+var bsubmit = function(action) {
+	bsubmit(action, '', '', 'iform')
+}
+var bsubmit = function(action, success, error, formClass) {
+	var fromdata = $("." + formClass).serialize();
+	$.ajax({
+		type : 'POS',
+		url : action,
+		data : fromdata,
+		dataType : 'json',
+		async : true,
+		success : function(data) {
+			debugger;
+			if (data.success) {
+				window.location.href = success;
+			} else {
+				if (data.message != null && data.message != "") {
+					alert(data.message);
+				} else {
+					alert('保存数据失败！');
+				}
+			}
+		},
+		error : function(info) {
+			alert(info.responseText);
+			alert(info);
+		}
+	});
+
+}

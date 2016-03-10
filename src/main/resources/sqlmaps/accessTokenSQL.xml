@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="accesstoken">
+	<select id="getaccesstokensql" resultType="com.xiaoshabao.framework.wechat.entity.AccessToken" parameterType="java.lang.String">
+		select * from wx_account a
+		<where>
+			<if test="appid != null and appid !=''">
+				and a.appid=#{appid}
+			</if>
+		</where>
+	</select>
+	<select id="accesstokenGetOne" resultType="com.xiaoshabao.framework.wechat.entity.AccessToken" parameterType="java.lang.Integer">
+		select * from wx_account a where a.account_id=#{account_id}
+	</select>
+	
+	<update id="accesstokenUpdate" parameterType="com.xiaoshabao.framework.wechat.entity.AccessToken">
+		UPDATE wx_account a
+		<set>
+			<if test="access_token !=null and access_token !='' ">
+				a.access_token =#{access_token},
+			</if>
+			<if test="expires_in !=null and expires_in !='' ">
+				a.expires_in =#{expires_in},
+			</if>
+			<if test="update_time !=null and update_time !='' ">
+				a.update_time =#{update_time},
+			</if>
+			<if test="jsaccess_token !=null and jsaccess_token !='' ">
+				a.jsaccess_token = #{jsaccess_token},
+			</if>
+			<if test="jsexpires_in !=null and jsexpires_in !='' ">
+				a.jsexpires_in = #{jsexpires_in},
+			</if>
+			<if test="jsupdate_time !=null and jsupdate_time !='' ">
+				a.jsupdate_time = #{jsupdate_time}
+			</if>
+		</set>
+		<where>
+			<if test="account_id !=null and account_id !='' ">
+				and a.account_id=#{account_id}
+			</if>
+			<if test="appid !=null and appid !='' ">
+				and a.appid=#{appid}
+			</if>
+			<if test="id !=null and id !='' ">
+				and a.id=#{id}
+			</if>
+		</where>
+	</update>
+</mapper>

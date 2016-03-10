@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userentity">
+	<select id="userentityGetValues" resultType="com.xiaoshabao.wxweb.entity.UserEntity"
+		parameterType="java.util.Map">
+		select * from td_m_user a 
+		<where>
+			<if test="login_name != null and login_name !=''">
+				and a.login_name=#{login_name}
+			</if>
+			<if test="user_password != null and user_password !=''">
+				and a.user_password=#{user_password}
+			</if>
+		</where>
+	</select>
+</mapper>
