@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
 
+
 public class ServiceIpAPITest {
 
 	@Before
@@ -21,7 +22,7 @@ public class ServiceIpAPITest {
 	@Test
 	public void testGetServiceIpList() {
 		try {
-			List<String> s = ServiceIpAPI.getServiceIpList("KEieKdOdauVXoj2YcV-s2B5HaaZT4QV_74mRXDVGrlletQu5nkMDg5_Ky8GRxcDcAyc-bgo0xL5h_qh39V-A6_58bHVYqJ9uPaJfUqsVdhgR4jE0t1KIqIWWtxEJdm1pPBKhABAAMV");
+			List<String> s = ServiceIpAPI.getServiceIpList("ZxzjSV6twdEatza1fR-ai_VNtFUIhzfcHcPEWlEVUzdU8-dsisFIfOQmkaeBzeKxXxxhXJKoCq_wHz4mwUnjBDOUUFVXZKbry9bMjllxIQxd-_jBUdYeqFBKqf0VyuG1QBGdABAZKP");
 			System.out.println(s);
 		} catch (WexinReqException e) {
 			// TODO Auto-generated catch block

@@ -1,7 +1,7 @@
-package com.xiaoshabao.framework.wechat.api.core.handler;
+package com.xiaoshabao.framework.wechat.apice.core.handler;
 
-import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
-import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqParam;
+import com.xiaoshabao.framework.wechat.apice.core.exception.WexinReqException;
+import com.xiaoshabao.framework.wechat.apice.core.req.model.WeixinReqParam;
 
 /**
  * 获取微信接口的信息

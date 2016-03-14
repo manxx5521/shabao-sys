@@ -1,13 +1,13 @@
-package com.xiaoshabao.framework.wechat.api.wxbase;
+package com.xiaoshabao.framework.wechat.apice.wxbase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
-import com.xiaoshabao.framework.wechat.api.core.util.WeiXinReqService;
-import com.xiaoshabao.framework.wechat.api.wxbase.model.ServiceIP;
+import com.xiaoshabao.framework.wechat.apice.core.exception.WexinReqException;
+import com.xiaoshabao.framework.wechat.apice.core.req.WeiXinReqService;
+import com.xiaoshabao.framework.wechat.apice.core.req.model.ServiceIP;
 
 /**
  * 微信--token信息

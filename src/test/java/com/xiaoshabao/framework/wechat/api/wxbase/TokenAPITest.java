@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
+
 /**
  * 微信token获取接口测试
  */

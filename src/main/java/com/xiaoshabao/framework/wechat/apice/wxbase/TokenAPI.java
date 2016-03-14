@@ -1,10 +1,10 @@
-package com.xiaoshabao.framework.wechat.api.wxbase;
+package com.xiaoshabao.framework.wechat.apice.wxbase;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
-import com.xiaoshabao.framework.wechat.api.core.util.WeiXinReqService;
-import com.xiaoshabao.framework.wechat.api.wxbase.model.AccessToken;
+import com.xiaoshabao.framework.wechat.apice.core.exception.WexinReqException;
+import com.xiaoshabao.framework.wechat.apice.core.req.WeiXinReqService;
+import com.xiaoshabao.framework.wechat.apice.core.req.model.AccessToken;
 /**
  * 微信--token信息
  */

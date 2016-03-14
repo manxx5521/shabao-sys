@@ -1,8 +1,6 @@
 package com.xiaoshabao.framework.wechat.apiJW.wxsendmsg.model;
 /**
  * 图文消息
- * @author LIAIJUN
- *
  */
 public class WxArticle {
 

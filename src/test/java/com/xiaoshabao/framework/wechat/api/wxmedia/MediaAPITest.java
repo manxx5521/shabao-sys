@@ -6,11 +6,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
-import com.xiaoshabao.framework.wechat.api.wxmedia.model.WxUpload;
+import com.xiaoshabao.framework.wechat.apice.core.exception.WexinReqException;
+import com.xiaoshabao.framework.wechat.apice.wxmedia.MediaAPI;
+import com.xiaoshabao.framework.wechat.apice.wxmedia.MediaType;
+import com.xiaoshabao.framework.wechat.apice.wxmedia.model.WxDwonload;
+import com.xiaoshabao.framework.wechat.apice.wxmedia.model.WxUpload;
 
 public class MediaAPITest {
-
+	
+	private String accessToken="a2C3AJwn8Mei_jP0cbq7WPVaoXhO_O9DWws5DcEusBNDMOG8yUWFAvmeFzLK6Fz_gR6xwAlbf8o76jz47WXAFPVy9TLt6Kv6_eSmWQApWSMJBShAIABTK";
+	
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -23,7 +28,6 @@ public class MediaAPITest {
 	 */
 	@Test
 	public void testUploadTempMedia() {
-		String accessToken="W5bumOO9sNu6UvA2hLeHkBQYMq2MsRaQ6NPISnrf4Ul7G6AUkszp5_58Ja8yWHvtEjBTKI3TaK7DIcOhfCAwMHp2zTASfzKmmTH5guzgIYaOR3IzlI-Am7POrzwiq6pNDEPhADAJKV";
 		try {
 			WxUpload bean=MediaAPI.uploadTempMedia(accessToken, MediaType.IMAGE, "E:\\test\\img01.jpg");
 			System.out.println("media_id:"+bean.getMedia_id());
@@ -32,10 +36,19 @@ public class MediaAPITest {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 *  微信--下载临时文件接口
+	 */
 	@Test
 	public void testDownTempMedia() {
-		fail("Not yet implemented");
+		try {
+			WxDwonload bean=MediaAPI.downTempMedia(accessToken, "CWcQ0lSe3-2vyysapJ3jYb3GZdnsqhEjKbbpQffPg-nuG7JMQh1SOmrPDsTf00Ip", "E:\\test");
+			System.out.println("FileName:"+bean.getFileName());
+			System.out.println("Filepath:"+bean.getFilepath());
+		} catch (WexinReqException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
