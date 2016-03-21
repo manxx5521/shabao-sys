@@ -1,7 +1,9 @@
 package com.xiaoshabao.framework.wechat.api.core.http;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -11,7 +13,10 @@ import java.util.Map;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -34,6 +39,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.xiaoshabao.framework.web.springmvc.util.StringUtil;
 
 /**
  * HttpClient工具类
@@ -209,6 +216,98 @@ public class HttpClientManager {
 		}
 		return responseContent;
 	}
+	
+	/**
+	 * 通过get的HTTPS形式下载文件
+	 */
+	public String getFileGetSSL(String url, Map<String ,Object> params,String path) {
+		return getFileGetSSL(url, params,path,null);
+	}
+	
+	/**
+	 * 通过get的HTTPS形式下载文件
+	 * @param url
+	 * @param params
+	 * @param path
+	 * @param fileName
+	 * @return
+	 */
+	public String getFileGetSSL(String url, Map<String ,Object> params,String path,String fileName) {
+		StringBuffer maps = new StringBuffer();
+		maps.append(url);
+		for (String key : params.keySet()) {
+			maps.append("&");
+			maps.append(key);
+			maps.append("=");
+			maps.append(params.get(key));
+		} 
+		System.setProperty("jsse.enableSNIExtension", "false");//解决SSLProtocolException: handshake alert: unrecognized_name异常
+		HttpGet httpGet = new HttpGet(maps.toString());// 创建get请求
+		CloseableHttpClient httpClient = null;
+		CloseableHttpResponse response = null;
+		HttpEntity entity = null;
+		try {
+			// 创建默认的httpClient实例.
+			PublicSuffixMatcher publicSuffixMatcher = PublicSuffixMatcherLoader
+					.load(new URL(httpGet.getURI().toString()));
+			DefaultHostnameVerifier hostnameVerifier = new DefaultHostnameVerifier(
+					publicSuffixMatcher);
+			httpClient = HttpClients.custom()
+					.setSSLHostnameVerifier(hostnameVerifier).build();
+			// 执行请求
+			response = httpClient.execute(httpGet);
+			// 获得头文件中的文件名
+			if(StringUtil.isEmpty(fileName)){
+				fileName = getDisposition(response,"filename");
+			}
+			String f=File.separator;
+			if (!path.endsWith(f)) {
+				path = path + f;
+			}
+			File storeFile = new File(path + fileName);
+			FileOutputStream output = new FileOutputStream(storeFile);
+			// 得到网络资源的字节数组,并写入文件
+			entity = response.getEntity();
+			if (entity != null) {
+				InputStream instream = entity.getContent();
+				try {
+					byte b[] = new byte[1024];
+					int j = 0;
+					while ((j = instream.read(b)) != -1) {
+						output.write(b, 0, j);
+					}
+					output.flush();
+					output.close();
+				} catch (IOException ex) {
+					throw ex;
+				} catch (RuntimeException ex) {
+					httpGet.abort();
+					throw ex;
+				} finally {
+					try {
+						instream.close();
+					} catch (Exception ignore) {
+					}
+				}
+			}
+
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		} finally {
+			try {
+				// 关闭连接,释放资源
+				if (response != null) {
+					response.close();
+				}
+				if (httpClient != null) {
+					httpClient.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return fileName;
+	}
 
 	/**
 	 * 发送post请求
@@ -278,12 +377,12 @@ public class HttpClientManager {
 	 * @param fileLists
 	 *            附件
 	 */
-	public String doPost(String httpUrl, Map<String, String> maps,
+	public String doPost(String httpUrl, Map<String, Object> maps,
 			List<File> fileLists) {
 		HttpPost httpPost = new HttpPost(httpUrl);// 创建httpPost
 		MultipartEntityBuilder meBuilder = MultipartEntityBuilder.create();
 		for (String key : maps.keySet()) {
-			meBuilder.addPart(key, new StringBody(maps.get(key),
+			meBuilder.addPart(key, new StringBody(maps.get(key).toString(),
 					ContentType.TEXT_PLAIN));
 		}
 		for (File file : fileLists) {
@@ -412,6 +511,34 @@ public class HttpClientManager {
 		httpPost.setEntity(reqEntity);
 		return doPostSSL(httpPost);
 	}
+	
+	/**
+	 * 发送 post请求（带文件）HTTPS请求
+	 * 
+	 * @param httpUrl
+	 *            要访问的URL,比如"https://www.baidu.com"
+	 * @param maps
+	 *            参数
+	 * @param fileLists
+	 *            附件
+	 */
+	public String doPostSSL(String httpUrl, Map<String, Object> maps,
+			List<File> fileLists) {
+		HttpPost httpPost = new HttpPost(httpUrl);// 创建httpPost
+		System.setProperty("jsse.enableSNIExtension", "false");//解决SSLProtocolException: handshake alert: unrecognized_name异常
+		MultipartEntityBuilder meBuilder = MultipartEntityBuilder.create();
+		for (String key : maps.keySet()) {
+			meBuilder.addPart(key, new StringBody(maps.get(key).toString(),
+					ContentType.TEXT_PLAIN));
+		}
+		for (File file : fileLists) {
+			FileBody fileBody = new FileBody(file);
+			meBuilder.addPart("files", fileBody);
+		}
+		HttpEntity reqEntity = meBuilder.build();
+		httpPost.setEntity(reqEntity);
+		return doPostSSL(httpPost);
+	}
 
 	/**
 	 * 发送post 的https请求
@@ -450,5 +577,32 @@ public class HttpClientManager {
 		}
 		return responseContent;
 	}
+	
+	
+	/**
+	 * 获取response header中Content-Disposition中的某个参数的值
+	 * 
+	 * @param response
+	 * @return
+	 */
+	public static String getDisposition(HttpResponse response,String paramName) {
+		Header contentHeader = response.getFirstHeader("Content-Disposition");
+		String filename = null;
+		if (contentHeader != null) {
+			HeaderElement[] values = contentHeader.getElements();
+			if (values.length == 1) {
+				NameValuePair param = values[0].getParameterByName(paramName);
+				if (param != null) {
+					try {
+						filename = param.getValue();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return filename;
+	}
+	
 
 }

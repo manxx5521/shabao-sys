@@ -21,6 +21,17 @@ public class AccessToken extends WeixinReqParam{
 	 * 第三方用户唯一凭证密钥，即appsecret
 	 */
 	private String secret;
+	
+	@Override
+	public String toParams() {
+		StringBuffer sb=new StringBuffer();
+		sb.append("grant_type=client_credential");
+		sb.append("&appid=");
+		sb.append(appid);
+		sb.append("&secret=");
+		sb.append(secret);
+		return sb.toString();
+	}
 
 	public String getGrant_type() {
 		return grant_type;

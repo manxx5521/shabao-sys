@@ -75,11 +75,11 @@ public class WeiXinReqService {
 			throw new WexinReqException("没有找到相应配置信息");
 		}
 		WeiXinReqHandler handler = WeiXinReqUtil.getMappingHander(objConfig.getMappingHandler());
-		return handler.doRequest(weixinReqParam);
+		return handler.doRequest(weixinReqParam,objConfig);
 	}
 	
 	/**
-	 * 返回json对象
+	 * 发送请求，返回json对象
 	 * @param weixinReqParam
 	 * @return	JSONObject 已经验证正确
 	 * @throws WexinReqException 

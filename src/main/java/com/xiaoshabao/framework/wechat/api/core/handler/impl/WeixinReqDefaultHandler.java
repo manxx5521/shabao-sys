@@ -5,14 +5,12 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoshabao.framework.wechat.api.core.annotation.ReqType;
 import com.xiaoshabao.framework.wechat.api.core.config.WeiXinConstant;
 import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
 import com.xiaoshabao.framework.wechat.api.core.handler.WeiXinReqHandler;
 import com.xiaoshabao.framework.wechat.api.core.http.HttpClientManager;
 import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqConfig;
 import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqParam;
-import com.xiaoshabao.framework.wechat.api.core.util.WeiXinReqUtil;
 
 /**
  * 默认的处理微信请求handler
@@ -29,13 +27,9 @@ public class WeixinReqDefaultHandler implements WeiXinReqHandler {
 	 * 默认的请求方法，使用HTTPS方式
 	 */
 	@Override
-	public String doRequest(WeixinReqParam weixinReqParam)
+	public String doRequest(WeixinReqParam weixinReqParam,WeixinReqConfig objConfig)
 			throws WexinReqException {
 		logger.info("使用WeixinReqDefaultHandler 处理请求");
-		ReqType reqType = weixinReqParam.getClass()
-				.getAnnotation(ReqType.class);
-		WeixinReqConfig objConfig = WeiXinReqUtil.getWeixinReqConfig(reqType
-				.value());
 		String reqUrl = objConfig.getUrl();
 		String method = objConfig.getMethod();
 		String datatype = objConfig.getDataType();

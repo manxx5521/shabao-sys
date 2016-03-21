@@ -1,6 +1,7 @@
 package com.xiaoshabao.framework.wechat.api.core.handler;
 
 import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
+import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqConfig;
 import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqParam;
 
 /**
@@ -21,7 +22,7 @@ public interface WeiXinReqHandler {
 	 * @return
 	 * @throws WexinReqException
 	 */
-	public String doRequest(WeixinReqParam weixinReqParam)
-			throws WexinReqException;
+	public String doRequest(WeixinReqParam weixinReqParam,
+			WeixinReqConfig objConfig) throws WexinReqException;
 
 }

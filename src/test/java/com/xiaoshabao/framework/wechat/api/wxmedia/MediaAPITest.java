@@ -6,15 +6,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.xiaoshabao.framework.wechat.apice.core.exception.WexinReqException;
-import com.xiaoshabao.framework.wechat.apice.wxmedia.MediaAPI;
-import com.xiaoshabao.framework.wechat.apice.wxmedia.MediaType;
-import com.xiaoshabao.framework.wechat.apice.wxmedia.model.WxDwonload;
-import com.xiaoshabao.framework.wechat.apice.wxmedia.model.WxUpload;
+import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
+import com.xiaoshabao.framework.wechat.api.wxmedia.model.DwonloadResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.model.UploadResult;
+
 
 public class MediaAPITest {
 	
-	private String accessToken="a2C3AJwn8Mei_jP0cbq7WPVaoXhO_O9DWws5DcEusBNDMOG8yUWFAvmeFzLK6Fz_gR6xwAlbf8o76jz47WXAFPVy9TLt6Kv6_eSmWQApWSMJBShAIABTK";
+	private String accessToken="axIQKrjIjLjds8dotPRzcMXtsp7q7VmmAi7ZirUEpaJQAtN9DUZj_SpkVIYpxofZrxI-lUYOT8Xy1PQpMQ4R6BaO7qd_-tPLZ5ChZjjnQmH_u49-JRnW4aJHU4u5NPIDDMWgAIAMVF";
 	
 	@Before
 	public void setUp() throws Exception {
@@ -29,7 +28,7 @@ public class MediaAPITest {
 	@Test
 	public void testUploadTempMedia() {
 		try {
-			WxUpload bean=MediaAPI.uploadTempMedia(accessToken, MediaType.IMAGE, "E:\\test\\img01.jpg");
+			UploadResult bean=MediaAPI.uploadTempMedia(accessToken, MediaType.IMAGE, "E:\\test\\img01.jpg");
 			System.out.println("media_id:"+bean.getMedia_id());
 			System.out.println("created_at:"+bean.getCreated_at());
 		} catch (WexinReqException e) {
@@ -43,9 +42,9 @@ public class MediaAPITest {
 	@Test
 	public void testDownTempMedia() {
 		try {
-			WxDwonload bean=MediaAPI.downTempMedia(accessToken, "CWcQ0lSe3-2vyysapJ3jYb3GZdnsqhEjKbbpQffPg-nuG7JMQh1SOmrPDsTf00Ip", "E:\\test");
+			DwonloadResult bean=MediaAPI.downTempMedia(accessToken, "CWcQ0lSe3-2vyysapJ3jYb3GZdnsqhEjKbbpQffPg-nuG7JMQh1SOmrPDsTf00Ip", "E:\\test");
 			System.out.println("FileName:"+bean.getFileName());
-			System.out.println("Filepath:"+bean.getFilepath());
+			System.out.println("Filepath:"+bean.getFilePath());
 		} catch (WexinReqException e) {
 			e.printStackTrace();
 		}

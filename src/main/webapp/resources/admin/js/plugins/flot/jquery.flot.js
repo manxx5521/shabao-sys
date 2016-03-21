@@ -2,6 +2,7 @@
  *
  * Released under the MIT license by IOLA, December 2007.
  *
+ *
  */
 
 // first an inline dependency, jquery.colorhelpers.js, we inline it here
