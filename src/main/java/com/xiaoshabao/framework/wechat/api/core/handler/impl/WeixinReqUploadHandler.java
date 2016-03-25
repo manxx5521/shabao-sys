@@ -18,7 +18,7 @@ import com.xiaoshabao.framework.wechat.api.core.req.WeixinUploadParam;
 
 /**
  * 微信上传文件方法<br>
- * 此方法使用https
+ * 此方法使用HTTPS，除了URL外无需传别的参数
  */
 public class WeixinReqUploadHandler implements WeiXinReqHandler {
 
@@ -27,25 +27,30 @@ public class WeixinReqUploadHandler implements WeiXinReqHandler {
 	public String doRequest(WeixinReqParam weixinReqParam,
 			WeixinReqConfig objConfig) throws WexinReqException {
 		logger.info("使用WeixinUploadHandler 处理上传文件");
-		WeixinUploadParam upParams=(WeixinUploadParam)weixinReqParam;
-		List<String> pathList =upParams.getFilePathName();
-		if(pathList.isEmpty()){
-			throw new WexinReqException("文件为空");
+		try {
+			WeixinUploadParam upParams=(WeixinUploadParam)weixinReqParam;
+			List<String> pathList =upParams.getFilePathName();
+			if(pathList.isEmpty()){
+				throw new WexinReqException("文件为空");
+			}
+			List<File> fileList=new ArrayList<File>();
+			for(String path:pathList){
+				fileList.add(new File(path));
+			}
+			Map<String,Object> map=upParams.getParams();
+			if(map==null||map.isEmpty()){
+				map=new HashMap<String, Object>();
+			}
+			map.put("access_token", upParams.getAccess_token());
+			String type=upParams.getType();
+			if(StringUtil.isNotEmpty(type)){
+				map.put("type", upParams.getType());
+			}
+			return HttpClientManager.getInstance().doPostSSL(objConfig.getUrl(),map, fileList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new WexinReqException("WeixinReqUploadHandler 进行操作是出现未知异常");
 		}
-		List<File> fileList=new ArrayList<File>();
-		for(String path:pathList){
-			fileList.add(new File(path));
-		}
-		Map<String,Object> map=upParams.getParams();
-		if(map==null||map.isEmpty()){
-			map=new HashMap<String, Object>();
-		}
-		map.put("access_token", upParams.getAccess_token());
-		String type=upParams.getType();
-		if(StringUtil.isNotEmpty(type)){
-			map.put("type", upParams.getType());
-		}
-		return HttpClientManager.getInstance().doPostSSL(objConfig.getUrl(),map, fileList);
 		
 	}
 

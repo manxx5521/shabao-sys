@@ -16,5 +16,10 @@ public class WechatApiConfig {
 	 *	handler的路径名用来拼接全路径名
 	 */
 	public final static String HANDLER_PATH = "com.xiaoshabao.framework.wechat.api.core.handler.impl.";
+	
+	/**
+	 *	handler的路径名用来拼接全路径名
+	 */
+	public final static String DEFAULT_METHOD = "post";
 
 }

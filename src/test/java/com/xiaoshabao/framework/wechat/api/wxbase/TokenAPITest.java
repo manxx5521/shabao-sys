@@ -20,7 +20,7 @@ public class TokenAPITest{
 	}
 
 	@Test
-	public void testGetAccessToken() throws WexinReqException {
+	public void testGetAccessToken() throws Exception {
 		try {
 			String s = TokenAPI.getAccessToken("wx07e34f9575809866","d8c5dae813951b0c31599c1a8aebf410");
 			
@@ -29,6 +29,7 @@ public class TokenAPITest{
 		} catch (WexinReqException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new Exception();
 		}
 	}
 

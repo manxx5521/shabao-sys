@@ -13,6 +13,9 @@ import com.xiaoshabao.framework.wechat.api.core.req.WeixinDownParam;
 import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqConfig;
 import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqParam;
 
+/**
+ * 通过HTTPS的get方式下载文件
+ */
 public class WeixinReqDownHandler implements WeiXinReqHandler {
 
 	private static Logger logger = Logger.getLogger(WeixinReqDownHandler.class);
@@ -21,16 +24,21 @@ public class WeixinReqDownHandler implements WeiXinReqHandler {
 	public String doRequest(WeixinReqParam weixinReqParam,
 			WeixinReqConfig objConfig) throws WexinReqException {
 		logger.info("使用WeixinReqDownHandler 下载文件文件");
-		WeixinDownParam upParams=(WeixinDownParam)weixinReqParam;
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("media_id", upParams.getMedia_id());
-		params.put("access_token", upParams.getAccess_token());
-		
-		String fileName= HttpClientManager.getInstance().getFileGetSSL(objConfig.getUrl(), params, upParams.getFilePath());
-		Map<String,String> result=new HashMap<String, String>();
-		result.put("fileName", fileName);
-		result.put("filePath", upParams.getFilePath());
-		return JSONObject.toJSONString(result);
+		try {
+			WeixinDownParam upParams=(WeixinDownParam)weixinReqParam;
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("media_id", upParams.getMedia_id());
+			params.put("access_token", upParams.getAccess_token());
+			
+			String fileName= HttpClientManager.getInstance().getFileGetSSL(objConfig.getUrl(), params, upParams.getFilePath());
+			Map<String,String> result=new HashMap<String, String>();
+			result.put("fileName", fileName);
+			result.put("filePath", upParams.getFilePath());
+			return JSONObject.toJSONString(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new WexinReqException("WeixinReqDownHandler 进行操作是出现未知异常");
+		}
 	}
 
 }

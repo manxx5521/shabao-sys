@@ -18,11 +18,14 @@ public class WeixinUploadParam extends WeixinReqParam {
 	 * 传送文件读取的路径
 	 */
 	private List<String> filePathName;
-
+	
+	/**
+	 * 上传文件是可以传递的参数
+	 */
 	private Map<String, Object> params;
 
 	/**
-	 * 向参数中赋值
+	 * 添加传递的参数
 	 * 
 	 * @param key
 	 * @param value

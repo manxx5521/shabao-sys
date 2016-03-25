@@ -26,7 +26,7 @@ public class WeiXinReqService {
 	private static WeiXinReqService weiXinReqUtil = null;
 
 
-	private WeiXinReqService() {
+	private WeiXinReqService() throws WexinReqException {
 		try {
 			WeiXinReqUtil.initReqConfig("weixin-reqcongfig.xml");
 		} catch (JDOMException e) {
@@ -41,8 +41,9 @@ public class WeiXinReqService {
 	/**
 	 * 获取公共的调用处理
 	 * @return
+	 * @throws WexinReqException 
 	 */
-	public static WeiXinReqService getInstance() {
+	public static WeiXinReqService getInstance() throws WexinReqException {
 		if (weiXinReqUtil == null) {
 			// 同步块，线程安全的创建实例
 			synchronized (WeiXinReqService.class) {

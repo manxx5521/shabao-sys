@@ -41,6 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.xiaoshabao.framework.web.springmvc.util.StringUtil;
+import com.xiaoshabao.framework.wechat.api.core.util.WeiXinReqUtil;
 
 /**
  * HttpClient工具类
@@ -241,19 +242,16 @@ public class HttpClientManager {
 			maps.append("=");
 			maps.append(params.get(key));
 		} 
-		System.setProperty("jsse.enableSNIExtension", "false");//解决SSLProtocolException: handshake alert: unrecognized_name异常
+		
+		//解决SSLProtocolException: handshake alert: unrecognized_name异常
+		System.setProperty("jsse.enableSNIExtension", "false");
 		HttpGet httpGet = new HttpGet(maps.toString());// 创建get请求
 		CloseableHttpClient httpClient = null;
 		CloseableHttpResponse response = null;
 		HttpEntity entity = null;
 		try {
-			// 创建默认的httpClient实例.
-			PublicSuffixMatcher publicSuffixMatcher = PublicSuffixMatcherLoader
-					.load(new URL(httpGet.getURI().toString()));
-			DefaultHostnameVerifier hostnameVerifier = new DefaultHostnameVerifier(
-					publicSuffixMatcher);
-			httpClient = HttpClients.custom()
-					.setSSLHostnameVerifier(hostnameVerifier).build();
+			httpClient = HttpClients.custom().setSSLHostnameVerifier(new CustomizedHostnameVerifier()).build();
+			
 			// 执行请求
 			response = httpClient.execute(httpGet);
 			// 获得头文件中的文件名
@@ -386,11 +384,15 @@ public class HttpClientManager {
 					ContentType.TEXT_PLAIN));
 		}
 		for (File file : fileLists) {
-			FileBody fileBody = new FileBody(file);
+			String content =WeiXinReqUtil.getFileContentType(file.getName().substring(file.getName().lastIndexOf(".") + 1));
+			FileBody fileBody = new FileBody(file, ContentType.create(content),file.getName());
+//			FileBody fileBody = new FileBody(file);
 			meBuilder.addPart("files", fileBody);
 		}
 		HttpEntity reqEntity = meBuilder.build();
 		httpPost.setEntity(reqEntity);
+		httpPost.setHeader("Connection", "Keep-Alive");
+		httpPost.setHeader("Charset", "UTF-8");
 		return doPost(httpPost);
 	}
 

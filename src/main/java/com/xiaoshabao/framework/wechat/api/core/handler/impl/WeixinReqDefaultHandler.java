@@ -30,38 +30,44 @@ public class WeixinReqDefaultHandler implements WeiXinReqHandler {
 	public String doRequest(WeixinReqParam weixinReqParam,WeixinReqConfig objConfig)
 			throws WexinReqException {
 		logger.info("使用WeixinReqDefaultHandler 处理请求");
-		String reqUrl = objConfig.getUrl();
-		String method = objConfig.getMethod();
-		String datatype = objConfig.getDataType();
+		
+		try {
+			String reqUrl = objConfig.getUrl();
+			String method = objConfig.getMethod();
+			String datatype = objConfig.getDataType();
 
-		// 处理JSON请求
-		if (WeiXinConstant.DATA_TYPE_JSON.equalsIgnoreCase(datatype)) {
-			String jsonData = JSONObject.toJSONString(weixinReqParam);
-			if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
-				return HttpClientManager.getInstance().doPostSSLByJSON(reqUrl,
-						jsonData);
+			// 处理JSON请求
+			if (WeiXinConstant.DATA_TYPE_JSON.equalsIgnoreCase(datatype)) {
+				String jsonData = JSONObject.toJSONString(weixinReqParam);
+				if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
+					return HttpClientManager.getInstance().doPostSSLByJSON(reqUrl,
+							jsonData);
+				}
+				Map<String, Object> params = JSONObject.parseObject(jsonData);
+				return HttpClientManager.getInstance().doGetSSL(reqUrl, params);
 			}
+
+			// 处理字符串请求
+			if (WeiXinConstant.DATA_TYPE_STRING.equalsIgnoreCase(datatype)) {
+				if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
+					return HttpClientManager.getInstance().doPostSSL(reqUrl,
+							weixinReqParam.toParams());
+				}
+				return HttpClientManager.getInstance().doGet(
+						reqUrl + "&" + weixinReqParam.toParams());
+			}
+
+			// 使用Map方式解析
+			String jsonData = JSONObject.toJSONString(weixinReqParam, true);
 			Map<String, Object> params = JSONObject.parseObject(jsonData);
-			return HttpClientManager.getInstance().doGetSSL(reqUrl, params);
-		}
-
-		// 处理字符串请求
-		if (WeiXinConstant.DATA_TYPE_STRING.equalsIgnoreCase(datatype)) {
 			if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
-				return HttpClientManager.getInstance().doPostSSL(reqUrl,
-						weixinReqParam.toParams());
+				return HttpClientManager.getInstance().doPostSSL(reqUrl, params);
 			}
-			return HttpClientManager.getInstance().doGet(
-					reqUrl + "&" + weixinReqParam.toParams());
+			return HttpClientManager.getInstance().doGetSSL(reqUrl, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new WexinReqException("WeixinReqDefaultHandler 进行操作是出现未知异常");
 		}
-
-		// 使用Map方式解析
-		String jsonData = JSONObject.toJSONString(weixinReqParam, true);
-		Map<String, Object> params = JSONObject.parseObject(jsonData);
-		if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
-			return HttpClientManager.getInstance().doPostSSL(reqUrl, params);
-		}
-		return HttpClientManager.getInstance().doGetSSL(reqUrl, params);
 	}
 
 }

@@ -159,16 +159,6 @@
 			<version>1.2.8</version>
 		</dependency>
 		<!-- json 转换包 begin -->
-		
-		<!-- json lib这个已经很久不更新了
-		<dependency>
-			
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>2.4</version>
-			<classifier>jdk15</classifier>
-		</dependency>
-		 -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
