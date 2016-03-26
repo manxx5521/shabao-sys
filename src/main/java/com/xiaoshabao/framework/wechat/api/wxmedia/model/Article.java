@@ -11,7 +11,7 @@ public class Article {
 	private String thumb_media_id;
 	/** 图文消息的作者 */
 	private String author;
-	/** 图文消息的描述 */
+	/** 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空 */
 	private String digest;
 	/** 是否显示封面，1为显示，0为不显示 */
 	private String show_cover_pic;
@@ -23,11 +23,19 @@ public class Article {
 	public String getThumb_media_id() {
 		return thumb_media_id;
 	}
-
+	
+	/**
+	 * 图文消息的封面图片素材id/必须是永久mediaID
+	 * @param thumb_media_id 
+	 */
 	public void setThumb_media_id(String thumb_media_id) {
 		this.thumb_media_id = thumb_media_id;
 	}
-
+	
+	/**
+	 * 图文消息的作者
+	 * @return
+	 */
 	public String getAuthor() {
 		return author;
 	}
@@ -63,7 +71,10 @@ public class Article {
 	public String getDigest() {
 		return digest;
 	}
-
+	/**
+	 * 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空
+	 * @param digest
+	 */
 	public void setDigest(String digest) {
 		this.digest = digest;
 	}
@@ -71,7 +82,10 @@ public class Article {
 	public String getShow_cover_pic() {
 		return show_cover_pic;
 	}
-
+	/**
+	 * 是否显示封面，1为显示，0为不显示
+	 * @param show_cover_pic
+	 */
 	public void setShow_cover_pic(String show_cover_pic) {
 		this.show_cover_pic = show_cover_pic;
 	}

@@ -30,39 +30,39 @@ public class WeixinReqDefaultHandler implements WeiXinReqHandler {
 	public String doRequest(WeixinReqParam weixinReqParam,WeixinReqConfig objConfig)
 			throws WexinReqException {
 		logger.info("使用WeixinReqDefaultHandler 处理请求");
-		
 		try {
 			String reqUrl = objConfig.getUrl();
 			String method = objConfig.getMethod();
 			String datatype = objConfig.getDataType();
-
-			// 处理JSON请求
-			if (WeiXinConstant.DATA_TYPE_JSON.equalsIgnoreCase(datatype)) {
+			// 处理JSON请求,只对post有效
+			if (WeiXinConstant.DATA_TYPE_JSON.equalsIgnoreCase(datatype)&&WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
 				String jsonData = JSONObject.toJSONString(weixinReqParam);
-				if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
-					return HttpClientManager.getInstance().doPostSSLByJSON(reqUrl,weixinReqParam.getAccess_token(),
-							jsonData);
-				}
-				Map<String, Object> params = JSONObject.parseObject(jsonData);
-				return HttpClientManager.getInstance().doGetSSL(reqUrl, params);
+				StringBuffer sb=new StringBuffer(reqUrl);
+				sb.append("&").append(weixinReqParam.toJsonParams());
+				return HttpClientManager.getInstance().doPostSSLByJSON(sb.toString(),jsonData);
 			}
 
 			// 处理字符串请求
 			if (WeiXinConstant.DATA_TYPE_STRING.equalsIgnoreCase(datatype)) {
+				//处理post方式
 				if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
 					return HttpClientManager.getInstance().doPostSSL(reqUrl,
 							weixinReqParam.toParams());
 				}
-				return HttpClientManager.getInstance().doGet(
-						reqUrl + "&" + weixinReqParam.toParams());
+				//处理get方式,和其他方式
+				StringBuffer sb=new StringBuffer(reqUrl);
+				sb.append("&").append(weixinReqParam.toParams());
+				return HttpClientManager.getInstance().doGet(sb.toString());
 			}
 
 			// 使用Map方式解析
 			String jsonData = JSONObject.toJSONString(weixinReqParam, true);
 			Map<String, Object> params = JSONObject.parseObject(jsonData);
+			//使用map的post方式解析
 			if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
 				return HttpClientManager.getInstance().doPostSSL(reqUrl, params);
 			}
+			//使用map的get方式解析
 			return HttpClientManager.getInstance().doGetSSL(reqUrl, params);
 		} catch (Exception e) {
 			e.printStackTrace();

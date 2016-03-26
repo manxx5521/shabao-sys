@@ -101,11 +101,17 @@ public class MediaAPITest {
 		try {
 			List<Article> articles=new ArrayList<Article>();
 			Article a1=new Article();
-			a1.setAuthor("manxx");
 			a1.setTitle("测试");
-			a1.setThumb_media_id("");
-			 String media_id=MediaAPI.uploadNews(accessToken, articles);
+			a1.setThumb_media_id("DarxYfQt2Ef4ZS-jgrbGzO9Mc8L_gqH0p1xvA_yPXAs");
+			a1.setAuthor("manxx");
+			a1.setDigest("摘要信息测试");
+			a1.setShow_cover_pic("1");
+			a1.setContent("测试内容");
+			a1.setContent_source_url("hh");
+			articles.add(a1);
+			String media_id=MediaAPI.uploadNews(accessToken, articles);
 			System.out.println("图文素材media_id:"+media_id);
+			//DarxYfQt2Ef4ZS-jgrbGzD6PjuR18OeAD7MGEBNA9dI
 		} catch (WexinReqException e) {
 			e.printStackTrace();
 			throw new Exception(e);

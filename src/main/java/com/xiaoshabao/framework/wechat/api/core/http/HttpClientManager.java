@@ -478,11 +478,8 @@ public class HttpClientManager {
 	 * @param jsonData
 	 *            参数为JSON像是{k1:value1,k2:value2}
 	 */
-	public String doPostSSLByJSON(String httpUrl,String access_token, String jsonData) {
-		StringBuffer sb=new StringBuffer(httpUrl);
-		sb.append("&access_token=");
-		sb.append(access_token);
-		HttpPost httpPost = new HttpPost(sb.toString());// 创建httpPost
+	public String doPostSSLByJSON(String httpUrl, String jsonData) {
+		HttpPost httpPost = new HttpPost(httpUrl);// 创建httpPost
 		try {
 			// 设置参数
 			StringEntity stringEntity = new StringEntity(jsonData,"utf-8");

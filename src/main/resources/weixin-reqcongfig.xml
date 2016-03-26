@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
+<!--
+	1、method的默认为post,dataType默认为map，mappingHandler默认为WeixinReqDefaultHandler。默认设置可修改。
+	2、当dataType为JSON时,method必须为post或者默认,否则以map方式解析。
+	3、mappingHandler不为默认时要根据handler的具体情况设置。
+-->
 <weixin-req>
-	<req key="access_token" method="post" dataType="String" url="https://api.weixin.qq.com/cgi-bin/token"></req>
-	<req key="getcallbackip" method="post" url="https://api.weixin.qq.com/cgi-bin/getcallbackip?1=1"></req>
-
+	<!-- 获取凭证 -->
+	<req key="access_token" dataType="String" url="https://api.weixin.qq.com/cgi-bin/token?1=1"></req>
+	<req key="getcallbackip" url="https://api.weixin.qq.com/cgi-bin/getcallbackip?1=1"></req>
 	<!-- 素材接口 -->
-	<req key="uploadTempMedia" method="post" mappingHandler="WeixinReqUploadHandler" 
-		url="https://file.api.weixin.qq.com/cgi-bin/media/upload?1=1"></req>
-	<req key="downTempMedia" method="get" mappingHandler="WeixinReqDownHandler" 
-		url="https://file.api.weixin.qq.com/cgi-bin/media/get?1=1"></req>
-	<req key="uploadMedia" method="post" mappingHandler="WeixinReqUploadHandler" 
-		url="https://api.weixin.qq.com/cgi-bin/material/add_material?1=1"></req>
-	<req key="downMedia" method="get" mappingHandler="WeixinReqDownHandler" 
-		url="https://file.api.weixin.qq.com/cgi-bin/media/get?1=1"></req>
-	<req key="uploadNewsImg" mappingHandler="WeixinReqUploadHandler" 
-		url="https://api.weixin.qq.com/cgi-bin/media/uploadimg?1=1"></req>
-	<req key="uploadNews" method="post" mappingHandler="WeixinReqUploadHandler" 
-		url="https://api.weixin.qq.com/cgi-bin/media/uploadimg?1=1"></req>
+	<req key="uploadTempMedia" mappingHandler="WeixinReqUploadHandler" url="https://file.api.weixin.qq.com/cgi-bin/media/upload?1=1"></req>
+	<req key="downTempMedia" mappingHandler="WeixinReqDownHandler" url="https://file.api.weixin.qq.com/cgi-bin/media/get?1=1"></req>
+	<req key="uploadMedia" mappingHandler="WeixinReqUploadHandler" url="https://api.weixin.qq.com/cgi-bin/material/add_material?1=1"></req>
+	<req key="downMedia" mappingHandler="WeixinReqDownHandler" url="https://file.api.weixin.qq.com/cgi-bin/media/get?1=1"></req>
+	<req key="uploadNewsImg" mappingHandler="WeixinReqUploadHandler" url="https://api.weixin.qq.com/cgi-bin/media/uploadimg?1=1"></req>
+	<req key="uploadNews" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/material/add_news?1=1"></req>
 
 	<!-- 客服接口 -->
 	<req key="kfaccountAdd" method="post" dataType="json" url="https://api.weixin.qq.com/customservice/kfaccount/add?1=1"></req>
