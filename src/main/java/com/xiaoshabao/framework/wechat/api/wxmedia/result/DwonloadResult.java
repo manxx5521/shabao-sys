@@ -1,4 +1,4 @@
-package com.xiaoshabao.framework.wechat.api.wxmedia.model;
+package com.xiaoshabao.framework.wechat.api.wxmedia.result;
 
 /**
  * 下载素材返回结果类

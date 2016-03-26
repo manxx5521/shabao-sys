@@ -384,9 +384,7 @@ public class HttpClientManager {
 					ContentType.TEXT_PLAIN));
 		}
 		for (File file : fileLists) {
-			String content =WeiXinReqUtil.getFileContentType(file.getName().substring(file.getName().lastIndexOf(".") + 1));
-			FileBody fileBody = new FileBody(file, ContentType.create(content),file.getName());
-//			FileBody fileBody = new FileBody(file);
+			FileBody fileBody = new FileBody(file);
 			meBuilder.addPart("files", fileBody);
 		}
 		HttpEntity reqEntity = meBuilder.build();
@@ -487,6 +485,8 @@ public class HttpClientManager {
 			stringEntity.setContentEncoding("UTF-8");
 			stringEntity.setContentType("application/json");
 			httpPost.setEntity(stringEntity);
+			httpPost.setHeader("Accept", "application/json");
+			httpPost.setHeader("Content-Type", "application/json");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -529,14 +529,18 @@ public class HttpClientManager {
 		HttpPost httpPost = new HttpPost(httpUrl);// 创建httpPost
 		System.setProperty("jsse.enableSNIExtension", "false");//解决SSLProtocolException: handshake alert: unrecognized_name异常
 		MultipartEntityBuilder meBuilder = MultipartEntityBuilder.create();
+		
 		for (String key : maps.keySet()) {
 			meBuilder.addPart(key, new StringBody(maps.get(key).toString(),
 					ContentType.TEXT_PLAIN));
+//					ContentType.create("text/plain", "utf-8")));//此方式可以指定编码
 		}
 		for (File file : fileLists) {
-			FileBody fileBody = new FileBody(file);
-			meBuilder.addPart("files", fileBody);
+			String content =WeiXinReqUtil.getFileContentType(file.getName().substring(file.getName().lastIndexOf(".") + 1));
+			FileBody fileBody = new FileBody(file,ContentType.create(content, "utf-8"));
+			meBuilder.addPart("media", fileBody);//名字设置成media要不上传永久素材报错
 		}
+		
 		HttpEntity reqEntity = meBuilder.build();
 		httpPost.setEntity(reqEntity);
 		return doPostSSL(httpPost);

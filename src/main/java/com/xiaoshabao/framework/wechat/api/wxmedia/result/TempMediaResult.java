@@ -1,9 +1,9 @@
-package com.xiaoshabao.framework.wechat.api.wxmedia.model;
+package com.xiaoshabao.framework.wechat.api.wxmedia.result;
 
 /**
  * 素材上传返回结果
  */
-public class UploadResult {
+public class TempMediaResult {
 	
 	private String type;
 

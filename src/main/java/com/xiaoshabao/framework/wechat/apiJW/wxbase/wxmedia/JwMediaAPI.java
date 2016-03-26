@@ -95,22 +95,7 @@ public class JwMediaAPI {
 	}
 	
 	
-	public static void main(String[] args){
-		 
-		try {
-			/*WxUpload s = WeixinMediaService.uploadMedia(
-					"kY9Y9rfdcr8AEtYZ9gPaRUjIAuJBvXO5ZOnbv2PYFxox__uSUQcqOnaGYN1xc4N1rI7NDCaPm_0ysFYjRVnPwCJHE7v7uF_l1hI6qi6QBsA",
-					"image","C:/Users/sfli.sir/Desktop/temp/2457331_160355071353_2.jpg");*/
-			WxDwonload d = JwMediaAPI.downMedia(
-					"kY9Y9rfdcr8AEtYZ9gPaRUjIAuJBvXO5ZOnbv2PYFxox__uSUQcqOnaGYN1xc4N1rI7NDCaPm_0ysFYjRVnPwCJHE7v7uF_l1hI6qi6QBsA",
-					"wBSDL0sz3zqOSGEXG9kIht48V9W7pAQBK50rFKFx1dv6FXsVNROxcxLPMUa9L-yI",
-					"C:/Users/sfli.sir/Desktop/temp/");
-			System.out.println(d.getFileName());
-		} catch (WexinReqException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 	/**
 	 * 上传新增永久图文素材
 	 * 
@@ -350,6 +335,23 @@ public class JwMediaAPI {
 		}
 		return mediaResource;
 	}
+	public static void main(String[] args){
+		 
+		try {
+			WxMediaForMaterial bean=new WxMediaForMaterial();
+			bean.setFilePath("E:\\test\\");
+			bean.setType("image");
+			bean.setFileName("img01.jpg");
+			WxMediaForMaterialResponse resp= JwMediaAPI.uploadMediaFileByMaterial(
+					"iczd2hHC2us50RAZDCpjY7hkb7QU-XFdr8LQTxV1WNPfu4-ZtbApxQX8UbY6FbHrfMS6V_sO7-It4NzcnJANBUP7rOKZnHjaRCE_asgvnHJ_4J2WIN0fKjoV6VGswPAmOAIfAFAYKS",
+					bean);
+			System.out.println(resp.getMedia_id());
+		} catch (WexinReqException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 永久获取多媒体资源的mediaId
 	 * 

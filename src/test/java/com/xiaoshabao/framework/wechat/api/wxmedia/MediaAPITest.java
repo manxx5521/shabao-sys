@@ -1,6 +1,6 @@
 package com.xiaoshabao.framework.wechat.api.wxmedia;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +10,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
+import com.xiaoshabao.framework.wechat.api.wxbase.TokenAPITest;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.Article;
-import com.xiaoshabao.framework.wechat.api.wxmedia.model.DwonloadResult;
-import com.xiaoshabao.framework.wechat.api.wxmedia.model.UploadResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.DwonloadResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.UploadMediaResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.UploadTempMediaResult;
 
 
 public class MediaAPITest {
 	
-	private String accessToken="HobMAcvEwPui80_3FGUz-9seo1gNqpGGhGebK3ERMDg8pONgLHYSXYMvE0pSGWGxs-X_k8c4e2rEnS2YtvmLLqymFWvHgr0lpuMDmX9zIVYK5lk0uRlrT9zNLhRnLLB8ABAbAAAIJI";
+	private String accessToken=TokenAPITest.accessToken;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -33,7 +35,7 @@ public class MediaAPITest {
 	@Test
 	public void testUploadTempMedia() throws Exception {
 		try {
-			UploadResult bean=MediaAPI.uploadTempMedia(accessToken, MediaType.IMAGE, "E:\\test\\img01.jpg");
+			UploadTempMediaResult bean=MediaAPI.uploadTempMedia(accessToken, MediaType.IMAGE, "E:\\test\\img01.jpg");
 			System.out.println("media_id:"+bean.getMedia_id());
 			System.out.println("created_at:"+bean.getCreated_at());
 		} catch (WexinReqException e) {
@@ -64,9 +66,11 @@ public class MediaAPITest {
 	@Test
 	public void testUploadMedia() throws Exception {
 		try {
-			UploadResult bean=MediaAPI.uploadMedia(accessToken, MediaType.IMAGE, "E:\\test\\img01.jpg");
-			System.out.println("media_id:"+bean.getMedia_id());
-			System.out.println("created_at:"+bean.getCreated_at());
+			UploadMediaResult result=MediaAPI.uploadMedia(accessToken, MediaType.IMAGE, "E:\\test\\img01.jpg");
+			System.out.println("media_id:"+result.getMedia_id());
+			System.out.println("返回url:"+result.getUrl());
+			//DarxYfQt2Ef4ZS-jgrbGzO9Mc8L_gqH0p1xvA_yPXAs
+			//https://mmbiz.qlogo.cn/mmbiz/BibYy0opVNUpBx21a13hKe5RwlWd6OicQ5tXpgfu4nkPnD48n6Py45AMpRDIfmgnebnap0ZV6ibkY97oaSfsOJicPA/0?wx_fmt=jpeg
 		} catch (WexinReqException e) {
 			e.printStackTrace();
 			throw new Exception(e);
@@ -82,7 +86,7 @@ public class MediaAPITest {
 		try {
 			 String url=MediaAPI.uploadNewsImg(accessToken,"E:\\test\\img01.jpg");
 			System.out.println("图片地址为:"+url);
-			//http://mmbiz.qpic.cn/mmbiz/BibYy0opVNUoYxKKjibGQDew0w0nu3BPYVgVWBEiaN3zEQgAdH34wksndLibpiclWYN0rRp309YuVhrurqsibu5fJ0mA/0
+			// http://mmbiz.qpic.cn/mmbiz/BibYy0opVNUoJxJXdQf9b51YFJxv2JEradEbQa5DtuMJv2ms3e4HAB9APsNsmQ8hicEfibfXGCibCok8NLiaLDE5t2A/0
 		} catch (WexinReqException e) {
 			e.printStackTrace();
 			throw new Exception(e);

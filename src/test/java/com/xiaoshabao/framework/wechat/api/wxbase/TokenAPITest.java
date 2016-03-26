@@ -10,6 +10,8 @@ import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
  * 微信token获取接口测试
  */
 public class TokenAPITest{
+	
+	public final static String accessToken="Cx-dHkN8R09Oj7xLB4ZAGFRQulEzvUXaZQ4MG3V2lbZDI8pmC00_CT1s2MZnZe3U8h4YLC48U_k0cA_lcjZfhmxiASPeRVNKZGg-yqJVv8ZNwzFBPe6tF9NxyFAYhgWXCQOjAIAKYW";
 
 	@Before
 	public void setUp() throws Exception {

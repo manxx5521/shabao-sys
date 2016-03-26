@@ -8,12 +8,13 @@ import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
 import com.xiaoshabao.framework.wechat.api.core.util.WeiXinReqService;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.Article;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.DownloadTempMedia;
-import com.xiaoshabao.framework.wechat.api.wxmedia.model.DwonloadResult;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.UploadMedia;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.UploadNews;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.UploadNewsImg;
-import com.xiaoshabao.framework.wechat.api.wxmedia.model.UploadResult;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.UploadTempMedia;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.DwonloadResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.UploadMediaResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.UploadTempMediaResult;
 
 /**
  * 微信-素材接口
@@ -35,7 +36,7 @@ public class MediaAPI {
 	 * @return
 	 * @throws WexinReqException
 	 */
-	public static UploadResult uploadTempMedia(String accessToken, String type,
+	public static UploadTempMediaResult uploadTempMedia(String accessToken, String type,
 			String fileNamePath) throws WexinReqException {
 		UploadTempMedia uploadMedia = new UploadTempMedia();
 		uploadMedia.setAccess_token(accessToken);
@@ -43,7 +44,7 @@ public class MediaAPI {
 		uploadMedia.setType(type);
 		JSONObject result = WeiXinReqService.getInstance().doWeinxinReqJson(
 				uploadMedia);
-		return JSON.toJavaObject(result, UploadResult.class);
+		return JSON.toJavaObject(result, UploadTempMediaResult.class);
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class MediaAPI {
 	}
 	
 	/**
-	 * 永久素材上传文件接口
+	 * 永久素材 上传文件接口-其他类
 	 * 
 	 * @param accessToken
 	 * @param type
@@ -80,7 +81,7 @@ public class MediaAPI {
 	 * @return
 	 * @throws WexinReqException
 	 */
-	public static UploadResult uploadMedia(String accessToken, String type,
+	public static UploadMediaResult uploadMedia(String accessToken, String type,
 			String fileNamePath) throws WexinReqException {
 		UploadMedia upload = new UploadMedia();
 		upload.setAccess_token(accessToken);
@@ -88,7 +89,7 @@ public class MediaAPI {
 		upload.setType(type);
 		JSONObject result = WeiXinReqService.getInstance().doWeinxinReqJson(
 				upload);
-		return JSON.toJavaObject(result, UploadResult.class);
+		return JSON.toJavaObject(result, UploadMediaResult.class);
 	}
 	/**
 	 * 上传永久图文-图片接口
