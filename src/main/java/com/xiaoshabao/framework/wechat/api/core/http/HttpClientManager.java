@@ -470,15 +470,19 @@ public class HttpClientManager {
 	}
 
 	/**
-	 * 发送 post https请求,参数为JSON形式
+	 * 发送 post HTTPS请求,参数为JSON形式
 	 * 
 	 * @param httpUrl
 	 *            要访问的URL,比如"http://www.baidu.com"
+	 * @param accessToken token,解决JSON传递token失效
 	 * @param jsonData
 	 *            参数为JSON像是{k1:value1,k2:value2}
 	 */
-	public String doPostSSLByJSON(String httpUrl, String jsonData) {
-		HttpPost httpPost = new HttpPost(httpUrl);// 创建httpPost
+	public String doPostSSLByJSON(String httpUrl,String access_token, String jsonData) {
+		StringBuffer sb=new StringBuffer(httpUrl);
+		sb.append("&access_token=");
+		sb.append(access_token);
+		HttpPost httpPost = new HttpPost(sb.toString());// 创建httpPost
 		try {
 			// 设置参数
 			StringEntity stringEntity = new StringEntity(jsonData,"utf-8");

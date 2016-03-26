@@ -40,7 +40,7 @@ public class WeixinReqDefaultHandler implements WeiXinReqHandler {
 			if (WeiXinConstant.DATA_TYPE_JSON.equalsIgnoreCase(datatype)) {
 				String jsonData = JSONObject.toJSONString(weixinReqParam);
 				if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
-					return HttpClientManager.getInstance().doPostSSLByJSON(reqUrl,
+					return HttpClientManager.getInstance().doPostSSLByJSON(reqUrl,weixinReqParam.getAccess_token(),
 							jsonData);
 				}
 				Map<String, Object> params = JSONObject.parseObject(jsonData);
