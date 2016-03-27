@@ -9,6 +9,5 @@ import com.xiaoshabao.framework.wechat.api.core.req.WeixinDownParam;
  */
 @ReqType("downTempMedia")
 public class DownloadTempMedia extends WeixinDownParam {
-
-
+	
 }
