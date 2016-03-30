@@ -1,13 +1,17 @@
 package com.xiaoshabao.framework.wechat.api.core.req;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * 微信请求参数父类
  */
 public class WeixinReqParam {
 
 	/**
-	 * 微信获取信息令牌
+	 * 微信获取信息令牌<br>
+	 * JSON转换时不转换此属性放到URL中
 	 */
+	@JSONField(serialize=false)
 	private String access_token;
 
 	/**
