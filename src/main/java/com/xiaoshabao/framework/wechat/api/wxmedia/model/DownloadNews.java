@@ -6,7 +6,7 @@ import com.xiaoshabao.framework.wechat.api.core.req.WeixinDownParam;
 /**
  * 下载-永久多媒体文件
  */
-@ReqType("downMedia")
-public class DownloadMedia extends WeixinDownParam {
+@ReqType("downNews")
+public class DownloadNews extends WeixinDownParam {
 	
 }

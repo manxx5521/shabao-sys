@@ -242,7 +242,6 @@ public class HttpClientManager {
 			maps.append("=");
 			maps.append(params.get(key));
 		} 
-		
 		//解决SSLProtocolException: handshake alert: unrecognized_name异常
 		System.setProperty("jsse.enableSNIExtension", "false");
 		HttpGet httpGet = new HttpGet(maps.toString());// 创建get请求
@@ -585,6 +584,108 @@ public class HttpClientManager {
 		return responseContent;
 	}
 	
+	/**
+	 * 通过post的HTTPS形式下载文件
+	 */
+	public String getFilePostSSL(String url, Map<String ,Object> params,String path) {
+		return getFilePostSSL(url, params,path,null);
+	}
+	
+	/**
+	 * 通过post的HTTPS形式下载文件
+	 * @param url
+	 * @param params
+	 * @param path
+	 * @param fileName
+	 * @return
+	 */
+	public String getFilePostSSL(String url, Map<String ,Object> params,String path,String fileName) {
+		HttpPost httpPost = new HttpPost(url);// 创建httpPost
+		System.setProperty("jsse.enableSNIExtension", "false");//解决SSLProtocolException: handshake alert: unrecognized_name异常
+		MultipartEntityBuilder meBuilder = MultipartEntityBuilder.create();
+		for (String key : params.keySet()) {
+			meBuilder.addPart(key, new StringBody(params.get(key).toString(),
+					ContentType.TEXT_PLAIN));
+		}
+		HttpEntity reqEntity = meBuilder.build();
+		httpPost.setEntity(reqEntity);
+		
+		CloseableHttpClient httpClient = null;
+		CloseableHttpResponse response = null;
+		HttpEntity entity = null;
+		try {
+			httpClient = HttpClients.custom().setSSLHostnameVerifier(new CustomizedHostnameVerifier()).build();
+			
+			// 执行请求
+			response = httpClient.execute(httpPost);
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode != HttpStatus.SC_OK) {
+				return null;
+			}
+			entity = response.getEntity();
+			if (entity == null) {
+				return null;
+			}
+			
+			String contentType=response.getFirstHeader("Content-Type").getValue();
+			if(contentType.equals("text/plain")){
+				logger.debug(EntityUtils.toString(entity, "utf-8"));
+				return EntityUtils.toString(entity, "utf-8");
+			}
+			
+			// 获得头文件中的文件名
+			if(StringUtil.isEmpty(fileName)){
+				fileName = getDisposition(response,"filename");
+			}
+			if(StringUtil.isEmpty(fileName)){
+				fileName = "file"+System.currentTimeMillis()+".jpg";
+			}
+			String f=File.separator;
+			if (!path.endsWith(f)) {
+				path = path + f;
+			}
+			File storeFile = new File(path + fileName);
+			FileOutputStream output = new FileOutputStream(storeFile);
+			// 得到网络资源的字节数组,并写入文件
+
+			InputStream instream = entity.getContent();
+			try {
+				byte b[] = new byte[1024];
+				int j = 0;
+				while ((j = instream.read(b)) != -1) {
+					output.write(b, 0, j);
+				}
+				output.flush();
+				output.close();
+			} catch (IOException ex) {
+				throw ex;
+			} catch (RuntimeException ex) {
+				httpPost.abort();
+				throw ex;
+			} finally {
+				try {
+					instream.close();
+				} catch (Exception ignore) {
+				}
+			}
+
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		} finally {
+			try {
+				// 关闭连接,释放资源
+				if (response != null) {
+					response.close();
+				}
+				if (httpClient != null) {
+					httpClient.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return fileName;
+	}
 	
 	/**
 	 * 获取response header中Content-Disposition中的某个参数的值

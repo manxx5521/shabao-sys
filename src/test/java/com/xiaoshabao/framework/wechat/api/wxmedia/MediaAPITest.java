@@ -1,7 +1,5 @@
 package com.xiaoshabao.framework.wechat.api.wxmedia;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +7,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.alibaba.fastjson.JSON;
 import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
 import com.xiaoshabao.framework.wechat.api.wxbase.TokenAPITest;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.Article;
 import com.xiaoshabao.framework.wechat.api.wxmedia.result.DwonloadResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.MediaCountResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.NewsMediaList;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.NewsResult;
+import com.xiaoshabao.framework.wechat.api.wxmedia.result.OthersMediaList;
 import com.xiaoshabao.framework.wechat.api.wxmedia.result.UploadMediaResult;
 import com.xiaoshabao.framework.wechat.api.wxmedia.result.UploadTempMediaResult;
 
@@ -111,51 +114,106 @@ public class MediaAPITest {
 			articles.add(a1);
 			String media_id=MediaAPI.uploadNews(accessToken, articles);
 			System.out.println("图文素材media_id:"+media_id);
-			//DarxYfQt2Ef4ZS-jgrbGzD6PjuR18OeAD7MGEBNA9dI
+			//ZN4l8BsTy1QPTKABBI2PzWN_B8Icx30a5-yz0UaxdMc
+		} catch (WexinReqException e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+	}
+	
+	//获取永久图文素材
+	@Test
+	public void testDownloadNews() throws Exception {
+		try {
+			NewsResult bean=MediaAPI.downloadNews(accessToken, "ZN4l8BsTy1QPTKABBI2PzeJrPPPNrLByUEHnSyvMhEs");
+			System.out.println("图文消息:"+JSON.toJSONString(bean));
+		} catch (WexinReqException e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+	}
+	
+	//获取其他素材-不包括视频
+	@Test
+	public void testDownMedia() throws Exception {
+		try {
+			DwonloadResult bean=MediaAPI.downloadMeida(accessToken, "uP_ofwCmwqX_5Fa4nHhtuvZolDV-cv_JWT5vPrMNubE", "E:\\test");
+			System.out.println("FileName:"+bean.getFileName());
+			System.out.println("Filepath:"+bean.getFilePath());
+		} catch (WexinReqException e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+	}
+	
+	// 删除永久素材
+	@Test
+	public void testDelMedia() throws Exception {
+		try {
+			MediaAPI.delMeida(accessToken,
+					"DarxYfQt2Ef4ZS-jgrbGzO9Mc8L_gqH0p1xvA_yPXAs");
+			System.out.println("测试通过");
 		} catch (WexinReqException e) {
 			e.printStackTrace();
 			throw new Exception(e);
 		}
 	}
 
+	// 修改永久图文素材
 	@Test
-	public void testGetMediaCount() {
-		fail("Not yet implemented");
+	public void testUpdateNewsMeida() throws Exception {
+		try {
+			Article a1=new Article();
+			a1.setTitle("测试111");
+			a1.setThumb_media_id("uP_ofwCmwqX_5Fa4nHhtureL5r2t7Z2Jmw2TADANISs");
+			a1.setAuthor("manxx");
+			a1.setDigest("摘要信息测试");
+			a1.setShow_cover_pic("1");
+			a1.setContent("测试内容");
+			a1.setContent_source_url("hh");
+			MediaAPI.updateNewsMeida(accessToken,"ZN4l8BsTy1QPTKABBI2PzeJrPPPNrLByUEHnSyvMhEs",0 , a1);
+			System.out.println("测试通过");
+		} catch (WexinReqException e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+	}
+	
+	// 获得永久素材总数
+	@Test
+	public void testGetMediaCount() throws Exception {
+		try {
+			MediaCountResult result=MediaAPI.getMediaCount(accessToken);
+			System.out.println("结果:"+JSON.toJSONString(result));
+		} catch (WexinReqException e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+	}
+	
+	// 获得图文素材列表
+	@Test
+	public void testGetMediaListByNews() throws Exception {
+		try {
+			NewsMediaList result = MediaAPI.getMediaListByNews(accessToken, 0, 20);
+			System.out.println("结果:" + JSON.toJSONString(result));
+		} catch (WexinReqException e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
 	}
 
+	// 获得图文素材列表
 	@Test
-	public void testGetArticlesByMaterial() {
-		fail("Not yet implemented");
+	public void testGetMediaListByOthers() throws Exception {
+		try {
+			OthersMediaList result = MediaAPI.getMediaListByOthers(accessToken,MediaType.IMAGE, 0,20);
+			System.out.println("结果:" + JSON.toJSONString(result));
+		} catch (WexinReqException e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
 	}
-
-	@Test
-	public void testDeleteArticlesByMaterial() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testUpdateArticlesByMaterial() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testQueryArticlesByMaterial() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetMediaIdByMaterial() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testUploadMediaFileByMaterial() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetMediaIdForMaterial() {
-		fail("Not yet implemented");
-	}
+	
 
 }

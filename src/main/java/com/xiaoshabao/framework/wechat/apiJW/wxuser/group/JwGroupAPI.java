@@ -15,7 +15,6 @@ import com.xiaoshabao.framework.wechat.apiJW.core.req.model.user.GroupGet;
 import com.xiaoshabao.framework.wechat.apiJW.core.req.model.user.GroupGetId;
 import com.xiaoshabao.framework.wechat.apiJW.core.req.model.user.GroupMembersUpdate;
 import com.xiaoshabao.framework.wechat.apiJW.core.req.model.user.GroupUpdate;
-import com.xiaoshabao.framework.wechat.apiJW.wxbase.wxtoken.TokenAPI;
 
 /**
  * 微信--用户
@@ -180,11 +179,7 @@ public class JwGroupAPI {
 	 * 获取tocken
 	 */
 	private static void getAccessToken(){
-		try {
-			System.out.println(TOKEN=TokenAPI.getAccessToken("wxd2b52b8f4bd5af7f","1b982dba2c3f853c3396babcdfa6cb1e"));
-		} catch (WexinReqException e) {
-			e.printStackTrace();
-		}
+//			System.out.println(TOKEN=TokenAPI.getAccessToken("wxd2b52b8f4bd5af7f","1b982dba2c3f853c3396babcdfa6cb1e"));
 	}
 	/**
 	 * 1.0 创建分组

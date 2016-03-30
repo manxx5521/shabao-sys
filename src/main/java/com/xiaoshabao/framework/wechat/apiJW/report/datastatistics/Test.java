@@ -9,7 +9,6 @@ import com.xiaoshabao.framework.wechat.apiJW.report.datastatistics.graphicanalys
 import com.xiaoshabao.framework.wechat.apiJW.report.datastatistics.graphicanalysis.model.GraphicAnalysisRtnInfo;
 import com.xiaoshabao.framework.wechat.apiJW.report.datastatistics.useranalysis.JwUserAnalysisAPI;
 import com.xiaoshabao.framework.wechat.apiJW.report.datastatistics.useranalysis.model.UserAnalysisRtnInfo;
-import com.xiaoshabao.framework.wechat.apiJW.wxbase.wxtoken.TokenAPI;
 
 
 public class Test {
@@ -38,7 +37,8 @@ public class Test {
 	}
 	
 	public String getAccessToken() throws WexinReqException{
-		return TokenAPI.getAccessToken(appid, appscret);
+//		return TokenAPI.getAccessToken(appid, appscret);
+		return null;//本来是获得token
 	}
 	//测试 获取用户增减数据
 	@SuppressWarnings("static-access")
