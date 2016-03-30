@@ -10,7 +10,7 @@ import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
 
 
 public class ServiceIpAPITest {
-
+	private String accessToken=TokenAPITest.accessToken;
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -22,7 +22,7 @@ public class ServiceIpAPITest {
 	@Test
 	public void testGetServiceIpList() {
 		try {
-			List<String> s = ServiceIpAPI.getServiceIpList("ZxzjSV6twdEatza1fR-ai_VNtFUIhzfcHcPEWlEVUzdU8-dsisFIfOQmkaeBzeKxXxxhXJKoCq_wHz4mwUnjBDOUUFVXZKbry9bMjllxIQxd-_jBUdYeqFBKqf0VyuG1QBGdABAZKP");
+			List<String> s = ServiceIpAPI.getServiceIpList(accessToken);
 			System.out.println(s);
 		} catch (WexinReqException e) {
 			// TODO Auto-generated catch block
