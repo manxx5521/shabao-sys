@@ -59,6 +59,7 @@ public class WeixinReqDefaultHandler implements WeiXinReqHandler {
 			String jsonData = JSONObject.toJSONString(weixinReqParam, true);
 			Map<String, Object> params = JSONObject.parseObject(jsonData);
 			//使用map的post方式解析
+			reqUrl+=weixinReqParam.toJsonParams(); //URL中添加token参数
 			if (WeiXinConstant.REQUEST_POST.equalsIgnoreCase(method)) {
 				return HttpClientManager.getInstance().doPostSSL(reqUrl, params);
 			}
