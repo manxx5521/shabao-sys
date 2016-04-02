@@ -103,7 +103,8 @@ public class MenuAPI {
 	}
 	
 	/**
-	 * 获取自定义接口配置
+	 * 获取自定义接口配置<br>
+	 * 包括菜单是否使用，和key信息等
 	 * @param accessToken
 	 * @return
 	 * @throws WexinReqException

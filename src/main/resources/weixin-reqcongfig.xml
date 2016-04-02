@@ -24,9 +24,23 @@
 	<req key="mediaList" des="素材列表" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/material/batchget_material?1=1"></req>
 	<!-- 自定义菜单 -->
 	<req key="menuCreate" des="创建菜单" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/menu/create?1=1"></req>
-	<req key="menuGet" url="https://api.weixin.qq.com/cgi-bin/menu/get?1=1"></req>
-	<req key="menuDel" method="get" url="https://api.weixin.qq.com/cgi-bin/menu/delete?1=1"></req>
-	<req key="menuConfigureGet" method="get" url="https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?1=1"></req>
+	<req key="menuGet" des="获得菜单" url="https://api.weixin.qq.com/cgi-bin/menu/get?1=1"></req>
+	<req key="menuDel" des="删除菜单" method="get" url="https://api.weixin.qq.com/cgi-bin/menu/delete?1=1"></req>
+	<req key="menuConfigureGet" des="获得菜单配置" method="get" url="https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?1=1"></req>
+	
+	<!-- 用户分组管理 -->
+	<req key="groupCreate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/create?1=1"></req>
+	<req key="groupsGet" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/groups/get?1=1"></req>
+	<req key="groupsGetid" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/getid?1=1"></req>
+	<req key="groupUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/update?1=1"></req>
+	<req key="groupMembersUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/members/update?1=1"></req>
+	<req key="batchGroupMembersUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/members/batchupdate?1=1"></req>
+	<req key="userRemarkUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/user/info/updateremark?1=1"></req>
+	<!-- sub.获取用户详细信息 -->
+	<req key="getUserBaseInfo" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/user/info?1=1"></req>
+	<req key="getUserInfoList" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/user/get?1=1"></req>
+	<!-- 删除分组 -->
+	<req key="groupDelete" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/delete?1=1"></req>
 
 	<!-- 客服接口 -->
 	<req key="kfaccountAdd" method="post" dataType="json" url="https://api.weixin.qq.com/customservice/kfaccount/add?1=1"></req>
@@ -44,20 +58,6 @@
 	<!-- update begin Author:luobaoli  Date:20150715 for：增加“获取自动回复规则”功能接口 -->
 	<req key="autoReplyRuleGet" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/get_current_autoreply_info?1=1"></req>
 	<!-- update end Author:luobaoli  Date:20150715 for：增加“获取自动回复规则”功能接口  -->
-
-	<!-- 用户分组管理 -->
-	<req key="groupCreate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/create?1=1"></req>
-	<req key="groupsGet" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/groups/get?1=1"></req>
-	<req key="groupsGetid" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/getid?1=1"></req>
-	<req key="groupUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/update?1=1"></req>
-	<req key="groupMembersUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/members/update?1=1"></req>
-	<req key="batchGroupMembersUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/members/batchupdate?1=1"></req>
-	<req key="userRemarkUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/user/info/updateremark?1=1"></req>
-	<!-- sub.获取用户详细信息 -->
-	<req key="getUserBaseInfo" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/user/info?1=1"></req>
-	<req key="getUserInfoList" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/user/get?1=1"></req>
-	<!-- 删除分组 -->
-	<req key="groupDelete" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/delete?1=1"></req>
 
 	<!-- 二维码管理-->
 	<req key="qrcodeCreate" method="post" dataType="json" url=" https://api.weixin.qq.com/cgi-bin/qrcode/create?1=1"></req>
