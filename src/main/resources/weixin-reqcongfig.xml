@@ -27,20 +27,19 @@
 	<req key="menuGet" des="获得菜单" url="https://api.weixin.qq.com/cgi-bin/menu/get?1=1"></req>
 	<req key="menuDel" des="删除菜单" method="get" url="https://api.weixin.qq.com/cgi-bin/menu/delete?1=1"></req>
 	<req key="menuConfigureGet" des="获得菜单配置" method="get" url="https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?1=1"></req>
-	
 	<!-- 用户分组管理 -->
-	<req key="groupCreate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/create?1=1"></req>
-	<req key="groupsGet" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/groups/get?1=1"></req>
-	<req key="groupsGetid" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/getid?1=1"></req>
-	<req key="groupUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/update?1=1"></req>
-	<req key="groupMembersUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/members/update?1=1"></req>
-	<req key="batchGroupMembersUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/members/batchupdate?1=1"></req>
-	<req key="userRemarkUpdate" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/user/info/updateremark?1=1"></req>
-	<!-- sub.获取用户详细信息 -->
+	<req key="groupCreate" des="创建分组" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/groups/create?1=1"></req>
+	<req key="groupsGet" des="获得分组" method="get" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/groups/get?1=1"></req>
+	<req key="groupsGetid" des="查询用户所在分组" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/groups/getid?1=1"></req>
+	<req key="groupUpdate" des="修改分组名" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/groups/update?1=1"></req>
+	<req key="groupMoveUserById" des="移动用户" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/groups/members/update?1=1"></req>
+	<req key="groupMoveUser" des="移动用户" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/groups/members/batchupdate?1=1"></req>
+	<req key="groupDelete" des="删除分组" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/groups/delete?1=1"></req>
+	<!-- 用户管理 -->
+	<req key="userRemarkUpdate" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/user/info/updateremark?1=1"></req>
 	<req key="getUserBaseInfo" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/user/info?1=1"></req>
-	<req key="getUserInfoList" method="get" dataType="param" url="https://api.weixin.qq.com/cgi-bin/user/get?1=1"></req>
-	<!-- 删除分组 -->
-	<req key="groupDelete" method="post" dataType="json" url="https://api.weixin.qq.com/cgi-bin/groups/delete?1=1"></req>
+	<req key="getUserInfoList" des="获得用户列表" method="get" dataType="JSON" url="https://api.weixin.qq.com/cgi-bin/user/get?1=1"></req>
+
 
 	<!-- 客服接口 -->
 	<req key="kfaccountAdd" method="post" dataType="json" url="https://api.weixin.qq.com/customservice/kfaccount/add?1=1"></req>

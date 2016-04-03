@@ -3,12 +3,12 @@ package com.xiaoshabao.framework.wechat.apiJW.core.req.model.user;
 
 /**
  * 取多媒体文件
- * 
- * @author sfli.sir
- * 
  */
 public class Group {
-
+	/**
+	 * 分组名字
+	 * <p>创建分组时，只需要传入名字</p>
+	 */
 	private String name;
 	
 	private String id;
