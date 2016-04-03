@@ -1,6 +1,7 @@
 package com.xiaoshabao.framework.wechat.api.wxuser;
 
-import static org.junit.Assert.fail;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,6 +9,8 @@ import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.xiaoshabao.framework.wechat.api.wxbase.TokenAPITest;
+import com.xiaoshabao.framework.wechat.api.wxuser.model.UserInfoGetBean;
+import com.xiaoshabao.framework.wechat.api.wxuser.result.UserBaseInfo;
 import com.xiaoshabao.framework.wechat.api.wxuser.result.UserOpenIDList;
 
 public class UserAPITest {
@@ -86,10 +89,51 @@ public class UserAPITest {
 			throw new Exception();
 		}
 	}
-
+	
+	//设置用户备注
 	@Test
-	public void testGetUserOpenIdListStringStringBoolean() {
-		fail("Not yet implemented");
+	public void testSetUserRemark() throws Exception {
+		try {
+			UserAPI.setUserRemark(accessToken,"oGMKNwnS1h3bcyKUu2WQsrFFNeZk","自己");
+			System.out.println("测试通过");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
+	// 获得用户基本信息
+	@Test
+	public void testGetUserBaseInfo() throws Exception {
+		try {
+			UserBaseInfo result=UserAPI.getUserBaseInfo(accessToken, "oGMKNwnS1h3bcyKUu2WQsrFFNeZk","zh_CN");
+			System.out.println("测试通过");
+			System.out.println("JSON内容："+JSON.toJSONString(result));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
+	// 获得用户基本信息
+	@Test
+	public void testGetUserBaseInfoList() throws Exception {
+		try {
+			List<UserInfoGetBean> list=new ArrayList<UserInfoGetBean>();
+			UserInfoGetBean b1=new UserInfoGetBean("oGMKNwnS1h3bcyKUu2WQsrFFNeZk");
+			UserInfoGetBean b2=new UserInfoGetBean();
+			b2.setLang("zh_CN");
+			b2.setOpenid("oGMKNwjuA6roAPJajXrkMPlA9ZG0");
+			list.add(b1);
+			list.add(b2);
+			
+			List<UserBaseInfo> result = UserAPI.getUserBaseInfoList(accessToken,list);
+			System.out.println("测试通过");
+			System.out.println("JSON内容：" + JSON.toJSONString(result));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
 	}
 
 }

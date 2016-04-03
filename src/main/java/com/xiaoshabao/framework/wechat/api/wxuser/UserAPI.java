@@ -6,7 +6,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
 import com.xiaoshabao.framework.wechat.api.core.util.WeiXinReqService;
+import com.xiaoshabao.framework.wechat.api.wxuser.model.UserBaseInfoGet;
+import com.xiaoshabao.framework.wechat.api.wxuser.model.UserBaseInfoGetList;
+import com.xiaoshabao.framework.wechat.api.wxuser.model.UserInfoGetBean;
 import com.xiaoshabao.framework.wechat.api.wxuser.model.UserListGet;
+import com.xiaoshabao.framework.wechat.api.wxuser.model.UserRemarkSet;
+import com.xiaoshabao.framework.wechat.api.wxuser.result.UserBaseInfo;
 import com.xiaoshabao.framework.wechat.api.wxuser.result.UserOpenIDList;
 /**
  * 微信用户API
@@ -89,5 +94,54 @@ public class UserAPI {
 		userList.setOpenidList(openList);
 		return userList;
 	}
+	
+	/**
+	 * 设置用户备注
+	 * @param accessToken
+	 * @param openid
+	 * @param remark 新的备注名，长度必须小于30字符
+	 * @throws WexinReqException
+	 */
+	public static void setUserRemark(String accessToken,String openid,String remark) throws WexinReqException{
+		UserRemarkSet upload = new UserRemarkSet();
+		upload.setAccess_token(accessToken);
+		upload.setOpenid(openid);
+		upload.setRemark(remark);
+		WeiXinReqService.getInstance().doWeinxinReqJson(upload);
+	}
+	
+	/**
+	 * 获取用户基本信息
+	 * @param accessToken
+	 * @param openid
+	 * @param lang	返回国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语
+	 * @return
+	 * @throws WexinReqException
+	 */
+	public static UserBaseInfo getUserBaseInfo(String accessToken,String openid,String lang) throws WexinReqException{
+		UserBaseInfoGet upload = new UserBaseInfoGet();
+		upload.setAccess_token(accessToken);
+		upload.setOpenid(openid);
+		upload.setLang(lang);
+		JSONObject result=WeiXinReqService.getInstance().doWeinxinReqJson(upload);
+		return JSONObject.toJavaObject(result, UserBaseInfo.class);
+	}
+	
+	/**
+	 * 获取用户基本信息列表
+	 * @param accessToken
+	 * @param list 用户列表，最大100
+	 * @return
+	 * @throws WexinReqException
+	 */
+	public static List<UserBaseInfo> getUserBaseInfoList(String accessToken,List<UserInfoGetBean> list) throws WexinReqException{
+		UserBaseInfoGetList upload = new UserBaseInfoGetList();
+		upload.setAccess_token(accessToken);
+		upload.setUser_list(list);
+		JSONObject result=WeiXinReqService.getInstance().doWeinxinReqJson(upload);
+		String str=result.getString("user_info_list");
+		return JSONArray.parseArray(str, UserBaseInfo.class);
+	}
+	
 
 }
