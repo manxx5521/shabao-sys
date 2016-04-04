@@ -11,7 +11,7 @@ import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
  */
 public class TokenAPITest{
 	
-	public final static String accessToken="aC4hem73Q2EgPLW6vbtXL-k62PM38fNwacNiy9XrEF2snW97R0ONgJBpEneg9toZo-vyazpWqeZhBDk9hGhtudc_PHJSzmsUVBDVhSO-i02xxxKD6Sb_ntcR8wmVuqNQVAAiAAADII";
+	public final static String accessToken="I0NJiI-ZhqAWJakAaV3wjNN4QTcnz1TcF9KwqbpuEiQstKGjQ0Upk9lxUuwLtWCPFZOm_Jc6C3TKGRsGFkjgSmIasWFGD82JcTdrk7Za-g5jgfvkFZqi6YzDnbp_Lwp9NBXaADAUIE";
 
 	@Before
 	public void setUp() throws Exception {

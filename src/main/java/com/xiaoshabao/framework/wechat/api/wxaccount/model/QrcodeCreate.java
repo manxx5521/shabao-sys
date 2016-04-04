@@ -1,10 +1,10 @@
-package com.xiaoshabao.framework.wechat.apiJW.core.req.model.account;
+package com.xiaoshabao.framework.wechat.api.wxaccount.model;
 
-import com.xiaoshabao.framework.wechat.apiJW.core.annotation.ReqType;
-import com.xiaoshabao.framework.wechat.apiJW.core.req.model.WeixinReqParam;
+import com.xiaoshabao.framework.wechat.api.core.annotation.ReqType;
+import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqParam;
 
 /**
- * 
+ * 创建二维吗
  */
 @ReqType("qrcodeCreate")
 public class QrcodeCreate extends WeixinReqParam {
