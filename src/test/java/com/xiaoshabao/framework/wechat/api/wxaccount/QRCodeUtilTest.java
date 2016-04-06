@@ -1,10 +1,12 @@
 package com.xiaoshabao.framework.wechat.api.wxaccount;
 
-import static org.junit.Assert.*;
+import java.io.File;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.zxing.BarcodeFormat;
 
 public class QRCodeUtilTest {
 
@@ -15,30 +17,20 @@ public class QRCodeUtilTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
-	@Test
-	public void testMain() {
-		fail("Not yet implemented");
-	}
-
+	
+	//生成二维码
 	@Test
 	public void testEncode() {
-		fail("Not yet implemented");
+		String filePostfix="png";
+		File file = new File("E://test//test_QR_CODE."+filePostfix);
+		QRCodeUtil.encode("http://www.baidu.com", file,filePostfix, BarcodeFormat.QR_CODE, 500, 500, null);
 	}
 
-	@Test
-	public void testWriteToFile() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToBufferedImage() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testDecode() {
-		fail("Not yet implemented");
+		File file = new File("E://test//test_QR_CODE.png");
+		QRCodeUtil.decode(file);
 	}
 
 }
