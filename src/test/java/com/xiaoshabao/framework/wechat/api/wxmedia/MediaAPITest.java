@@ -203,7 +203,7 @@ public class MediaAPITest {
 		}
 	}
 
-	// 获得图文素材列表
+	// 获得其他素材列表
 	@Test
 	public void testGetMediaListByOthers() throws Exception {
 		try {
