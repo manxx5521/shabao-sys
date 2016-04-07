@@ -19,7 +19,6 @@ public class Article {
 	private String content;
 	/** 在图文消息页面点击“阅读原文”后的页面 */
 	private String content_source_url;
-
 	public String getThumb_media_id() {
 		return thumb_media_id;
 	}
@@ -39,7 +38,10 @@ public class Article {
 	public String getAuthor() {
 		return author;
 	}
-
+	/**
+	 * 图文消息的作者
+	 * @param author
+	 */
 	public void setAuthor(String author) {
 		this.author = author;
 	}
@@ -47,7 +49,10 @@ public class Article {
 	public String getTitle() {
 		return title;
 	}
-
+	/**
+	 * 图文消息的标题
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -55,7 +60,10 @@ public class Article {
 	public String getContent_source_url() {
 		return content_source_url;
 	}
-
+	/**
+	 * 在图文消息页面点击“阅读原文”后的页面 
+	 * @param content_source_url
+	 */
 	public void setContent_source_url(String content_source_url) {
 		this.content_source_url = content_source_url;
 	}
@@ -63,11 +71,17 @@ public class Article {
 	public String getContent() {
 		return content;
 	}
-
+	/**
+	 * 图文消息页面的内容，支持HTML标签
+	 * @param content
+	 */
 	public void setContent(String content) {
 		this.content = content;
 	}
-
+	/**
+	 * 图文消息的摘要，仅有单图文消息才有摘要，多图文此处为空 
+	 * @return
+	 */
 	public String getDigest() {
 		return digest;
 	}

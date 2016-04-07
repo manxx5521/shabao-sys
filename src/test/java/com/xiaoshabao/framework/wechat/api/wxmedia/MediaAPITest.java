@@ -54,7 +54,7 @@ public class MediaAPITest {
 	@Test
 	public void testDownTempMedia() throws Exception {
 		try {
-			DwonloadResult bean=MediaAPI.downTempMedia(accessToken, "0mdsOYmWzZEiPolK4KlS1lrH0HIGj3SJVL4jZv3jHjNcOlamP86T1IVGdwzdXIEg", "E:\\test");
+			DwonloadResult bean=MediaAPI.downTempMedia(accessToken, "h52d9ii11NC1O9ri6hlFuVW5BSeFDypBsPdl8D8PdAgRg_UCLCUZpUyEugbnumNI", "E:\\test");
 			System.out.println("FileName:"+bean.getFileName());
 			System.out.println("Filepath:"+bean.getFilePath());
 		} catch (WexinReqException e) {
@@ -69,10 +69,10 @@ public class MediaAPITest {
 	@Test
 	public void testUploadMedia() throws Exception {
 		try {
-			UploadMediaResult result=MediaAPI.uploadMedia(accessToken, MediaType.IMAGE, "E:\\test\\img01.jpg");
+			UploadMediaResult result=MediaAPI.uploadMedia(accessToken, MediaType.IMAGE, "E:\\test\\11.png");
 			System.out.println("media_id:"+result.getMedia_id());
 			System.out.println("返回url:"+result.getUrl());
-			//DarxYfQt2Ef4ZS-jgrbGzO9Mc8L_gqH0p1xvA_yPXAs
+			//ADqYlnhfHd--TyuNuo0S1SlEARy9hns-9djP8hB1Fmc
 			//https://mmbiz.qlogo.cn/mmbiz/BibYy0opVNUpBx21a13hKe5RwlWd6OicQ5tXpgfu4nkPnD48n6Py45AMpRDIfmgnebnap0ZV6ibkY97oaSfsOJicPA/0?wx_fmt=jpeg
 		} catch (WexinReqException e) {
 			e.printStackTrace();
@@ -105,7 +105,7 @@ public class MediaAPITest {
 			List<Article> articles=new ArrayList<Article>();
 			Article a1=new Article();
 			a1.setTitle("测试");
-			a1.setThumb_media_id("DarxYfQt2Ef4ZS-jgrbGzO9Mc8L_gqH0p1xvA_yPXAs");
+			a1.setThumb_media_id("77f1UYMo_5pyjMO9MxLm2YijLpbSoU67JaLfrxi435g");
 			a1.setAuthor("manxx");
 			a1.setDigest("摘要信息测试");
 			a1.setShow_cover_pic("1");

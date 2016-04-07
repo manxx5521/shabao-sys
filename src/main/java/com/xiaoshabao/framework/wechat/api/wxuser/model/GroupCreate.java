@@ -6,9 +6,6 @@ import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqParam;
 
 /**
  * 取多媒体文件
- * 
- * @author sfli.sir
- * 
  */
 @ReqType("groupCreate")
 public class GroupCreate extends WeixinReqParam {

@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.xiaoshabao.framework.wechat.api.wxmedia.model.Article;
 import com.xiaoshabao.framework.wechat.apiJW.core.common.WxstoreUtils;
 import com.xiaoshabao.framework.wechat.apiJW.core.exception.WexinReqException;
 import com.xiaoshabao.framework.wechat.apiJW.core.req.model.user.Group;
@@ -683,37 +684,23 @@ public class JwSendMessageAPI {
 		}
 		return mediaResource;
 	}
-	
+	public static String accessToken="hioJaiuuA6XkWNysRek3W5iVrEZ_C8fSvAOR8QnCu6h2MOtLaBLyzcBOCAnzVH29rx-ooe0GF9KOYElK_LX5KSG_JHcqn4vECU6dVoNZlVOQX_kERmoyXzn7coHFjQ0QSOTiAHADZE";
 	
 
 	public static void main(String[] args) throws WexinReqException {
-		/*
-		 * String a = "" + "<xml>" +
-		 * "<ToUserName><![CDATA[gh_3e8adccde292]]></ToUserName>" +
-		 * "<FromUserName><![CDATA[oR5Gjjl_eiZoUpGozMo7dbBJ362A]]></FromUserName>"
-		 * + "<CreateTime>1394524295</CreateTime>" +
-		 * "<MsgType><![CDATA[event]]></MsgType>" +
-		 * "<Event><![CDATA[MASSSENDJOBFINISH]]></Event>" +
-		 * "<MsgID>1988</MsgID>" + "<Status><![CDATA[sendsuccess]]></Status>" +
-		 * "<TotalCount>100</TotalCount>" + "<FilterCount>80</FilterCount>" +
-		 * "<SentCount>75</SentCount>" + "<ErrorCount>5</ErrorCount>" +
-		 * "</xml>"; getReportBySendMessageReturnString(a);
-		 */
-
-		/*String a = "" + "{" + "   \"errcode\":0," + "   \"errmsg\":\"send job submission success\"," + "   \"msg_id\":34182" + "}";
-		SendMessageResponse response = (SendMessageResponse) JSONObject.toBean(JSONObject.fromObject(a), SendMessageResponse.class);
-		System.out.println(response);*/
-		
-		/*List<String> a  = new ArrayList<String>();
-		a.add("111");
-		a.add("3");
-		a.add("4");
-		a.add("e");
-		a.add("df");
-		a.add("222");
-		JSONObject aa = new JSONObject();
-		aa.put("user", a);
-		System.out.println(aa.toString());*/
+		List<WxArticle> articles=new ArrayList<WxArticle>();
+		WxArticle a1=new WxArticle();
+		a1.setAuthor("manxx");
+		a1.setContent("测试内容111111");
+		a1.setDigest("这是图文摘要");
+		a1.setShow_cover_pic("1");
+		a1.setThumb_media_id("ADqYlnhfHd--TyuNuo0S1SlEARy9hns-9djP8hB1Fmc");
+		a1.setTitle("这是一个标题");
+		a1.setContent_source_url("www.baidu.com");
+		articles.add(a1);
+		Group g=new Group();
+		g.setId("102");
+		JwSendMessageAPI.sendMessageToGroupOrAllWithArticles(accessToken, false, null, articles);
 	}
 
 }

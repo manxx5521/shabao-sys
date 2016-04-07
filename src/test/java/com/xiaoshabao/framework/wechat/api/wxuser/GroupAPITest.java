@@ -26,7 +26,7 @@ public class GroupAPITest {
 	@Test
 	public void testCreateGroup() throws Exception {
 		try {
-			GroupCreate result=GroupAPI.createGroup(accessToken, "测试分组2");
+			GroupCreate result=GroupAPI.createGroup(accessToken, "自己");
 			System.out.println("测试通过");
 			System.out.println("分组名字："+result.getGroup().getName());
 			System.out.println("分组id："+result.getGroup().getId());
@@ -79,7 +79,7 @@ public class GroupAPITest {
 	@Test
 	public void testMoveUserGroupByid() throws Exception {
 		try {
-			GroupAPI.moveUserGroup(accessToken, "oGMKNwnS1h3bcyKUu2WQsrFFNeZk", "100");
+			GroupAPI.moveUserGroup(accessToken, "oGMKNwnS1h3bcyKUu2WQsrFFNeZk", "102");
 			System.out.println("测试通过");
 		} catch (Exception e) {
 			e.printStackTrace();
