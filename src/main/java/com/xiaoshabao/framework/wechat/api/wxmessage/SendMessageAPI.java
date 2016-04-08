@@ -9,7 +9,9 @@ import com.xiaoshabao.framework.wechat.api.wxmedia.model.Article;
 import com.xiaoshabao.framework.wechat.api.wxmessage.model.MessageFilter;
 import com.xiaoshabao.framework.wechat.api.wxmessage.model.MessageNews;
 import com.xiaoshabao.framework.wechat.api.wxmessage.model.SendNewsByGroup;
+import com.xiaoshabao.framework.wechat.api.wxmessage.model.SendTextByGroup;
 import com.xiaoshabao.framework.wechat.api.wxmessage.result.MessageUploadResult;
+import com.xiaoshabao.framework.wechat.api.wxmessage.result.NewsMessResult;
 
 public class SendMessageAPI {
 	/**
@@ -34,13 +36,31 @@ public class SendMessageAPI {
 	 * @return
 	 * @throws WexinReqException
 	 */
-	public static void sendMessByGroup(String accessToken,String media_id,String group_id) throws WexinReqException{
+	public static NewsMessResult sendNewsMessByGroup(String accessToken,String media_id,String group_id) throws WexinReqException{
 		SendNewsByGroup upload =new SendNewsByGroup();
 		upload.setAccess_token(accessToken);
 		upload.setFilter(new MessageFilter (group_id));
 		upload.setMpnews("media_id", media_id);
 		upload.setMsgtype("mpnews");
 		JSONObject result = WeiXinReqService.getInstance().doWeinxinReqJson(upload);
-		System.out.println(result.toJSONString());
+		return JSONObject.toJavaObject(result, NewsMessResult.class);
+	}
+	
+	/**
+	 * 群发文本消息-通过分组
+	 * @param accessToken
+	 * @param content 文本内容
+	 * @param group_id 要发送到的组
+	 * @return msg_id 消息发送任务的ID
+	 * @throws WexinReqException
+	 */
+	public static String sendMessTextByGroup(String accessToken,String content,String group_id) throws WexinReqException{
+		SendTextByGroup upload =new SendTextByGroup();
+		upload.setAccess_token(accessToken);
+		upload.setFilter(new MessageFilter (group_id));
+		upload.setText("content", content);
+		upload.setMsgtype("text");
+		JSONObject result = WeiXinReqService.getInstance().doWeinxinReqJson(upload);
+		return result.getString("msg_id");
 	}
 }

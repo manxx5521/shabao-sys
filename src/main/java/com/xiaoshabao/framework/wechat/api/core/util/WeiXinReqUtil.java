@@ -19,7 +19,6 @@ import com.xiaoshabao.framework.wechat.api.core.config.WeiXinConstant;
 import com.xiaoshabao.framework.wechat.api.core.exception.WexinReqException;
 import com.xiaoshabao.framework.wechat.api.core.handler.WeiXinReqHandler;
 import com.xiaoshabao.framework.wechat.api.core.req.WeixinReqConfig;
-import com.xiaoshabao.framework.wechat.apiJW.core.req.WeiXinReqService;
 
 
 /**

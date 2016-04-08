@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.xiaoshabao.framework.wechat.api.wxbase.TokenAPITest;
 import com.xiaoshabao.framework.wechat.api.wxmedia.model.Article;
 import com.xiaoshabao.framework.wechat.api.wxmessage.result.MessageUploadResult;
+import com.xiaoshabao.framework.wechat.api.wxmessage.result.NewsMessResult;
 
 public class SendMessageAPITest {
 	private String accessToken=TokenAPITest.accessToken;
@@ -45,10 +46,24 @@ public class SendMessageAPITest {
 		}
 	}
 	
+	//群发图文
 	@Test
-	public void testSendMessByGroup() throws Exception {
+	public void testSendNewsMessByGroup() throws Exception {
 		try {
-			SendMessageAPI.sendMessByGroup(accessToken, "ZN4l8BsTy1QPTKABBI2PzeJrPPPNrLByUEHnSyvMhEs", "102");
+			NewsMessResult result=SendMessageAPI.sendNewsMessByGroup(accessToken, "ZN4l8BsTy1QPTKABBI2PzeJrPPPNrLByUEHnSyvMhEs", "102");
+			System.out.println("测试通过");
+			System.out.println("JSON内容："+JSON.toJSONString(result));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
+	// 群发图文
+	@Test
+	public void testSendTextMessByGroup() throws Exception {
+		try {
+			SendMessageAPI.sendMessTextByGroup(accessToken,"测试发送文本", "102");
 			System.out.println("测试通过");
 		} catch (Exception e) {
 			e.printStackTrace();
