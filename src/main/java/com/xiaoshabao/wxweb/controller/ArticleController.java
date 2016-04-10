@@ -115,4 +115,21 @@ public class ArticleController extends BaseController{
 		model.put("article", article);
 		return new ModelAndView ("/wechat/article/article");
 	}
+	
+	/**
+	 * 添加文章初始化方法UE方式
+	 * @param map
+	 * @param article_id
+	 * @return
+	 * @throws DaoException 
+	 */
+	@RequestMapping(value="/admin/articleAddUe")
+	public ModelAndView addArticleUeInit (ModelMap map,String article_id) throws DaoException{
+		Integer user_id=SessionManager.getInstance().getUser_id();
+		UserAccountValue param=new UserAccountValue();
+		param.setUser_id(user_id);
+		List<UserAccountValue> list=this.articleService.getData(UserAccountValue.class, param);
+		map.put("dataList", list);
+		return new ModelAndView ("/admin/article/articleAddByUe");
+	}
 }
