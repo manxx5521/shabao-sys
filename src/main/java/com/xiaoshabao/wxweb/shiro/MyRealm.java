@@ -24,7 +24,7 @@ public class MyRealm extends AuthorizingRealm {
 	private ShiroService shiroService;
 
 	@Resource(name = "sessionUserInfo")
-	private SessionUserInfo userSession;
+	private SessionUserInfo userSession; 
 
 	/**
 	 * 为当限前登录的用户授予角色和权

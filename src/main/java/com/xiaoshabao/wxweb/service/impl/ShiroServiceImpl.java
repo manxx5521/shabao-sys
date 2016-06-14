@@ -37,7 +37,7 @@ public class ShiroServiceImpl extends BaseServiceImpl implements ShiroService {
 			Set<String> set = new HashSet<String>();
 			set.addAll(list);
 			return set;
-		} catch (DaoException e) {
+		} catch (Exception e) {
 			logger.info("用户 "+LoginName+" 数据库获取角色失败");
 			e.printStackTrace();
 			return null;
@@ -51,7 +51,7 @@ public class ShiroServiceImpl extends BaseServiceImpl implements ShiroService {
 			Set<String> set = new HashSet<String>();
 			set.addAll(list);
 			return set;
-		} catch (DaoException e) {
+		} catch (Exception e) {
 			logger.info("用户 "+LoginName+" 数据库获取权限失败");
 			e.printStackTrace();
 			return null;

@@ -239,12 +239,23 @@
 			<version>3.0.0</version>
 		</dependency>
 		<!-- 二维码 end -->
+		
+		<!-- ueditor -->
+		<!-- <dependency>
+			<groupId>com.baidu</groupId>
+			<artifactId>ueditor</artifactId>
+			<version>1.1.2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ueditor-1.1.2.jar</systemPath>
+		</dependency> -->
+		<!-- ueditor -->
+		
 	</dependencies>
 
 	<build>
 		<finalName>shabao-sys</finalName>
 		<plugins>
-			<!-- 默认编辑级别 -->
+			<!-- JDK 默认编辑级别 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

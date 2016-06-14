@@ -12,7 +12,7 @@ public class SessionManager {
 	 * 私有默认构造子
 	 */
 	private SessionManager() {
-
+ 
 	}
 
 	/**

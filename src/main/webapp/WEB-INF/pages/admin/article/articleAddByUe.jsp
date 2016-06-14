@@ -12,6 +12,7 @@
 <link href="${webRoot}/resources/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 <!-- 美化表单复选框 -->
 <link href="${webRoot}/resources/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+
 </head>
 <body class="gray-bg">
    <div class="wrapper wrapper-content animated fadeInRight">
@@ -89,7 +90,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">内容：</label>
                                 <div class="col-sm-9">
-                                    <textarea id="ccomment" name="content" class="form-control" required="" aria-required="true" style="height:325px;"></textarea>
+                                	<script id="editor" name="content" type="text/plain" style="width:100%;height:400px;"></script>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -104,15 +105,23 @@
         </div>
     </div>
     
-    <script src="${webRoot}/resources/admin/js/jquery.min.js?v=2.1.4"></script>
+  	<script src="${webRoot}/resources/admin/js/jquery.min.js?v=2.1.4"></script>
 	<script src="${webRoot}/resources/admin/js/bootstrap.min.js?v=3.3.5"></script>
     <script src="${webRoot}/resources/admin/js/content.min.js?v=1.0.0"></script>
     <script src="${webRoot}/resources/admin/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="${webRoot}/resources/admin/js/plugins/validate/messages_zh.min.js"></script>
     
-     <script src="${webRoot}/resources/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
-     <script src="${webRoot}/resources/admin/js/plugins/iCheck/icheck.min.js"></script>
-   <!--  <script src="js/demo/form-validate-demo.min.js"></script> -->
+    <script src="${webRoot}/resources/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="${webRoot}/resources/admin/js/plugins/iCheck/icheck.min.js"></script>
+  	<!-- baidu ue begin-->
+  	<script type="text/javascript" charset="utf-8">
+ 	//	window.PROJECT_CONTEXT = '${webRoot}';
+  	</script>
+	<script type="text/javascript" charset="utf-8" src="${webRoot}/resources/js/plugins/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="${webRoot}/resources/js/plugins/ueditor/ueditor.all.min.js"> </script>
+	<script type="text/javascript" charset="utf-8" src="${webRoot}/resources/js/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+	
+	<!-- baidu ue end 要使用下边一段js-->
    <script type="text/javascript">
    $(document).ready(function() {
 	   //设置复选框样式
@@ -121,6 +130,9 @@
 		   $(":checkbox").attr('checked', true);
 	   }
 	   $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})
+	   
+	   	//实例化百度编辑器
+    	var ue = UE.getEditor('editor');
 	   
 		// 提交表单
 		$('.btn').click(function() {
